@@ -39,6 +39,30 @@ export default function LactoRecipe(props) {
 					) : (
 						''
 					)}
+					{ferment.name ? (
+						<li key={`Salt${ferment._id}`}>
+							Salt: {ferment.ingredients.salt.amount.value}{' '}
+							{ferment.ingredients.salt.amount.unit}
+						</li>
+					) : (
+						''
+					)}
+					{ferment.name ? (
+						<div>
+							Aromatics:
+							<ul>
+								{ferment.ingredients.other.map(item => {
+									return (
+										<li key={`${item._id}${item.name}`}>
+											{item.name} :: {item.amount.value} {item.amount.unit}
+										</li>
+									);
+								})}
+							</ul>
+						</div>
+					) : (
+						''
+					)}
 				</ul>
 			</div>
 		</div>
