@@ -13,9 +13,8 @@ export default function Lactoferments(props) {
 			} catch (error) {
 				console.error(error);
 			}
-		})(),
-			[];
-	});
+		})();
+	}, []);
 
 	return (
 		<div className="LactoFerments">
@@ -24,7 +23,10 @@ export default function Lactoferments(props) {
 				{ferments.map(item => {
 					//how do i make it to ths show page
 					return (
-						<Link to={`/${item._id}`} key={`${item._id}${item.name}`}>
+						<Link
+							to={`/lactoferments/${item._id}`}
+							key={`${item._id}${item.name}`}
+						>
 							<li> {item.name} </li>{' '}
 						</Link>
 					);

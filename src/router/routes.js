@@ -5,6 +5,7 @@ import Home from '../pages/Home';
 import LactoFerments from '../pages/Lactoferments';
 import Beers from '../pages/Beers';
 import LactoRecipe from '../pages/LactoRecipe';
+import BeerRecipe from '../pages/BeerRecipe';
 
 const routes = [
 	{
@@ -30,7 +31,12 @@ const routes = [
 	{
 		Component: LactoRecipe,
 		key: 'LactoRecipe',
-		path: '/:id'
+		path: '/lactoferments/:id'
+	},
+	{
+		Component: BeerRecipe,
+		key: 'BeerRecipe',
+		path: '/beers/:id'
 	},
 	{
 		Component: App,
