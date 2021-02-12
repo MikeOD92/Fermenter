@@ -9,6 +9,16 @@ import BeerRecipe from '../pages/BeerRecipe';
 
 const routes = [
 	{
+		Component: LactoRecipe,
+		key: 'LactoRecipe',
+		path: '/lactoferments/:id'
+	},
+	{
+		Component: BeerRecipe,
+		key: 'BeerRecipe',
+		path: '/beers/:id'
+	},
+	{
 		Component: LactoFerments,
 		key: 'LactoFerments',
 		path: '/lactoferments'
@@ -27,16 +37,6 @@ const routes = [
 		Component: About,
 		key: 'About',
 		path: '/about'
-	},
-	{
-		Component: LactoRecipe,
-		key: 'LactoRecipe',
-		path: '/lactoferments/:id'
-	},
-	{
-		Component: BeerRecipe,
-		key: 'BeerRecipe',
-		path: '/beers/:id'
 	},
 	{
 		Component: App,

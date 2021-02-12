@@ -23,7 +23,11 @@ export default function Beers(props) {
 				{beers.map(item => {
 					//how do i make it to ths show page
 					return (
-						<Link to={`/${item._id}`} key={`${item._id}${item.name}`}>
+						<Link
+							to={`/beers/${item._id}`}
+							key={`${item._id}${item.name}`}
+							props={props}
+						>
 							<li> {item.name} </li>{' '}
 						</Link>
 					);
