@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function LactoRecipe(props) {
-	const [ferment, setFerment] = useState({});
+	const [currentFerment, setFerment] = useState({});
 
 	useEffect(() => {
 		(async () => {
@@ -14,8 +14,6 @@ export default function LactoRecipe(props) {
 				setFerment(data);
 			} catch (error) {
 				console.error(error);
-			} finally {
-				console.log(ferment);
 			}
 		})();
 	}, []);
@@ -23,37 +21,37 @@ export default function LactoRecipe(props) {
 	return (
 		<div>
 			<div className="recipe-head">
-				<h1> {ferment.name ? ferment.name : ''}</h1>
-				<h3> {ferment.description ? ferment.description : ''}</h3>
+				<h1> {currentFerment.name ? currentFerment.name : ''}</h1>
+				<h3> {currentFerment.description ? currentFerment.description : ''}</h3>
 			</div>
 			<div className="recipe-body">
 				<h4> ingredients </h4>
-				<ul>
-					{ferment.name ? (
-						<li key={`firstIngredent${ferment._id}`}>
+				<div>
+					{currentFerment.name ? (
+						<li key={`firstIngredent${currentFerment._id}`}>
 							{' '}
-							{ferment.ingredients.main[0].name} ::{' '}
-							{ferment.ingredients.main[0].amount.value}{' '}
-							{ferment.ingredients.main[0].amount.unit}
+							{currentFerment.ingredients.main[0].name} ::{' '}
+							{currentFerment.ingredients.main[0].amount.value}{' '}
+							{currentFerment.ingredients.main[0].amount.unit}
 						</li>
 					) : (
 						''
 					)}
 					{/* ////Salt */}
-					{ferment.name ? (
-						<li key={`Salt${ferment._id}`}>
-							Salt:: {ferment.ingredients.salt.amount.value}{' '}
-							{ferment.ingredients.salt.amount.unit}
+					{currentFerment.name ? (
+						<li key={`Salt${currentFerment._id}`}>
+							Salt:: {currentFerment.ingredients.salt.amount.value}{' '}
+							{currentFerment.ingredients.salt.amount.unit}
 						</li>
 					) : (
 						''
 					)}
 					{/* ////// Aromatics */}
-					{ferment.name ? (
+					{currentFerment.name ? (
 						<div>
 							Aromatics:
 							<ul>
-								{ferment.ingredients.other.map(item => {
+								{currentFerment.ingredients.other.map(item => {
 									return (
 										<li key={`${item._id}${item.name}`}>
 											{item.name} :: {item.amount.value} {item.amount.unit}
@@ -65,23 +63,40 @@ export default function LactoRecipe(props) {
 					) : (
 						''
 					)}
-					{/* ////Volume  */}
-					{ferment.name ? (
-						<div>
-							volume
-							{ferment.name ? (
-								<div>
-									<h4> Volume </h4>
-									{ferment.volume.val} :: {ferment.volume.unit}
-								</div>
-							) : (
-								''
-							)}
-						</div>
-					) : (
-						''
-					)}
-				</ul>
+				</div>
+				{/* ////Volume  */}
+				{currentFerment.name ? (
+					<div>
+						{currentFerment.volume ? (
+							<div>
+								<h4> Volume </h4>
+								{currentFerment.volume.val} - {currentFerment.volume.unit}
+							</div>
+						) : (
+							''
+						)}
+					</div>
+				) : (
+					''
+				)}
+
+				<h4> Method</h4>
+				{/* {currentFerment.method ? (
+					<h1> {currentFerment.method.ferment.temp}</h1>
+				) : (
+					''
+				)} */}
+				{currentFerment.method ? (
+					<div>
+						<p>
+							{' '}
+							Ferment at {currentFerment.method.ferment.temp}C for{' '}
+							{currentFerment.method.ferment.duration}
+						</p>
+					</div>
+				) : (
+					''
+				)}
 			</div>
 		</div>
 	);

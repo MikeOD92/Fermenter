@@ -45,7 +45,7 @@ export default function NewLactoFerment(props) {
 				body: JSON.stringify({
 					name: nameVal,
 					description: descriptionVal,
-					Volume: {
+					volume: {
 						val: volumeValVal,
 						unit: volumeUnitVal
 					},
