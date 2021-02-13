@@ -2,7 +2,47 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function EditLactoFerment(props) {
-	const [lactoferment, setlactoFerment] = useState({});
+	const [lactoferment, setlactoFerment] = useState({
+		volume: {
+			val: null,
+			unit: ''
+		},
+		method: {
+			ferment: {
+				temp: null,
+				duration: ''
+			}
+		},
+		ingredients: {
+			salt: {
+				amount: {
+					value: null,
+					unit: ''
+				}
+			},
+			notes: [],
+			main: [
+				{
+					amount: {
+						value: null,
+						unit: ''
+					},
+					name: ''
+				}
+			],
+			other: [
+				{
+					amount: {
+						value: null,
+						unit: ''
+					},
+					name: ''
+				}
+			],
+			name: '',
+			description: ''
+		}
+	});
 	const [didDelete, setDidDelete] = useState({});
 
 	const volumeVal = useRef(null);
@@ -28,8 +68,8 @@ export default function EditLactoFerment(props) {
 				);
 				const data = await response.json();
 				setlactoFerment(data);
-				console.log(lactoferment);
-				console.log(`this is the volume.val ${lactoferment.volume.val}`);
+				// console.log(lactoferment);
+				await console.log(`this is the volume.val ${lactoferment.volume.val}`);
 			} catch (error) {
 				console.error(error);
 			}
