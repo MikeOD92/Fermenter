@@ -12,16 +12,16 @@ import NewBeer from '../pages/NewBeer';
 import NewLactoFerment from '../pages/NewLactoferment';
 
 const routes = [
-	// {
-	// 	Component: LactoRecipeEdit,
-	// 	key: 'LactoRecipeEdit',
-	// 	path: '/lactoferments/:id/edit'
-	// },
-	// {
-	// 	Component: BeerRecipeEdit,
-	// 	key: 'BeerRecipeEdit',
-	// 	path: '/beers/:id/edit'
-	// },
+	{
+		Component: LactoRecipeEdit,
+		key: 'LactoRecipeEdit',
+		path: '/lactoferments/:id/edit'
+	},
+	{
+		Component: BeerRecipeEdit,
+		key: 'BeerRecipeEdit',
+		path: '/beers/:id/edit'
+	},
 	{
 		Component: NewBeer,
 		key: 'NewBeer',

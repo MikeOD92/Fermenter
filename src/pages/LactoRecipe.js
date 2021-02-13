@@ -12,6 +12,7 @@ export default function LactoRecipe(props) {
 				);
 				const data = await response.json();
 				setFerment(data);
+				console.log('looking for the ID', currentFerment._id);
 			} catch (error) {
 				console.error(error);
 			}
@@ -98,6 +99,10 @@ export default function LactoRecipe(props) {
 					''
 				)}
 			</div>
+			<Link to={`/lactoferments/${currentFerment._id}/edit`}>
+				{' '}
+				Update Recipe{' '}
+			</Link>
 		</div>
 	);
 }
