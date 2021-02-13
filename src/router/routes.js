@@ -8,17 +8,29 @@ import LactoRecipe from '../pages/LactoRecipe';
 import BeerRecipe from '../pages/BeerRecipe';
 import BeerRecipeEdit from '../pages/BeerRecipeEdit';
 import LactoRecipeEdit from '../pages/LactoRecipeEdit';
+import NewBeer from '../pages/NewBeer';
+import NewLactoFerment from '../pages/NewLactoferment';
 
 const routes = [
+	// {
+	// 	Component: LactoRecipeEdit,
+	// 	key: 'LactoRecipeEdit',
+	// 	path: '/lactoferments/:id/edit'
+	// },
+	// {
+	// 	Component: BeerRecipeEdit,
+	// 	key: 'BeerRecipeEdit',
+	// 	path: '/beers/:id/edit'
+	// },
 	{
-		Component: LactoRecipeEdit,
-		key: 'LactoRecipeEdit',
-		path: '/lactoferments/:id/edit'
+		Component: NewBeer,
+		key: 'NewBeer',
+		path: '/beers/new'
 	},
 	{
-		Component: BeerRecipeEdit,
-		key: 'BeerRecipeEdit',
-		path: '/beers/:id/edit'
+		Component: NewLactoFerment,
+		key: 'NewLactoFerment',
+		path: '/lactoferments/new'
 	},
 	{
 		Component: LactoRecipe,
