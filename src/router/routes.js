@@ -6,8 +6,20 @@ import LactoFerments from '../pages/Lactoferments';
 import Beers from '../pages/Beers';
 import LactoRecipe from '../pages/LactoRecipe';
 import BeerRecipe from '../pages/BeerRecipe';
+import BeerRecipeEdit from '../pages/BeerRecipeEdit';
+import LactoRecipeEdit from '../pages/LactoRecipeEdit';
 
 const routes = [
+	{
+		Component: LactoRecipeEdit,
+		key: 'LactoRecipeEdit',
+		path: '/lactoferments/:id/edit'
+	},
+	{
+		Component: BeerRecipeEdit,
+		key: 'BeerRecipeEdit',
+		path: '/beers/:id/edit'
+	},
 	{
 		Component: LactoRecipe,
 		key: 'LactoRecipe',

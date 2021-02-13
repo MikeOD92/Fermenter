@@ -9,12 +9,10 @@ export default function BeerRecipe(props) {
 			try {
 				const response = await fetch(`/api/beers/${props.match.params.id}`);
 				const data = await response.json();
-				// console.log(data);
+				console.log(data);
 				setBeer(data);
 			} catch (error) {
 				console.error(error);
-			} finally {
-				console.log(beer);
 			}
 		})();
 	}, []);
@@ -30,38 +28,16 @@ export default function BeerRecipe(props) {
 			</div>
 
 			{/* I have NO IDEA Why i cant acess the malts or anything in ingredients/method etc.
-			none of the nested objs seems to work at all. 
-				
-				<div className="recipe-body">
-					<h2> Grain bill and Malt</h2>
-					{beer.ingredients.malt
-					? beer.ingredients.malt.map(item => {
-							return (
-								<div>
-									{item.name}
-									{item.amount.value}
-									{item.amount.unit}
-								</div>
-							);
-					  })
-					: ''}
-				<h2>Hops</h2>
-				{beer.ingredients.hops
-					? beer.ingredients.hops.map(item => {
-							return (
-								<div>
-									{item.name}
-									{item.attribute}
-									{item.add}
-									{item.amount.value}
-									{item.amount.unit}
-								</div>
-							);
-					  })
-					: ''}
-				<h2>Yeast</h2>
-				<p>{beer.ingredients.yeast ? beer.ingredients.yeast : ''}</p>
-			</div> */}
+			none of the nested objs seems to work at all.  */}
+
+			<div>
+				{' '}
+				<h2> ingredients</h2>
+				{beer.ingredients ? <h1> I exist</h1> : ''}
+				{/* {beer.ingredients.malt.map(item => {
+					return { item, name };
+				})} */}
+			</div>
 		</div>
 	);
 }

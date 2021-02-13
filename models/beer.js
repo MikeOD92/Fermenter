@@ -1,7 +1,6 @@
 const {Schema, model} = require('mongoose');
 
 const beerSchema = new Schema({
-    // id: Number,
     name: String, 
     style: String, 
     description: String, 

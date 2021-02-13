@@ -53,9 +53,10 @@ gulp.task('default', (cb) => {
 	 serveStatic: ['./public']
 	});
 	// SET UP WATCJERS TO LISTEN TO CHANGES IN FILES
- 	gulp.watch('./src/scss/**/*',  gulp.task('styles'));
+	gulp.watch('./src/scss/**/*',  gulp.task('styles'));
 	gulp.watch('./src/components/**/*', gulp.task('webpack'));
-	gulp.watch('./src/*', gulp.task('webpack'))
+	gulp.watch('./src/**/*.js', gulp.task('webpack')); 
+	gulp.watch('./src/*', gulp.task('webpack'));
 	// LISTEN FOR WHEN TO RELOAD PAGES
 	gulp
 		.watch([
