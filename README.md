@@ -1,3 +1,3 @@
 #Fermenter
 
-an app for managing and collection fermentation recipes
+an app for managing and collecting fermentation recipes
