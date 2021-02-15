@@ -2,48 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function EditLactoFerment(props) {
-	const [lactoferment, setlactoFerment] = useState({
-		volume: {
-			val: null,
-			unit: ''
-		},
-		method: {
-			ferment: {
-				temp: null,
-				duration: ''
-			}
-		},
-		ingredients: {
-			salt: {
-				amount: {
-					value: null,
-					unit: ''
-				}
-			},
-			notes: [],
-			main: [
-				{
-					amount: {
-						value: null,
-						unit: ''
-					},
-					name: ''
-				}
-			],
-			other: [
-				{
-					amount: {
-						value: null,
-						unit: ''
-					},
-					name: ''
-				}
-			],
-			name: '',
-			description: ''
-		}
-	});
+	const [lactoFerment, setlactoFerment] = useState({});
 	const [didDelete, setDidDelete] = useState({});
+
+	//////////// Form Ref vars
 
 	const volumeVal = useRef(null);
 	const volumeUnit = useRef(null);
@@ -60,6 +22,8 @@ export default function EditLactoFerment(props) {
 	const name = useRef(null);
 	const description = useRef(null);
 
+	////////////////// use effect on load
+
 	useEffect(() => {
 		(async () => {
 			try {
@@ -68,16 +32,17 @@ export default function EditLactoFerment(props) {
 				);
 				const data = await response.json();
 				setlactoFerment(data);
-				// console.log(lactoferment);
-				await console.log(`this is the volume.val ${lactoferment.volume.val}`);
 			} catch (error) {
 				console.error(error);
 			}
 		})();
 	}, []);
 
+	///////////handle submit
+
 	const handleSubmit = async e => {
 		e.preventDefault;
+
 		const volumeValVal = volumeVal.current.value;
 		const volumeUnitVal = volumeUnit.current.value;
 		const fermentTempVal = fermentTemp.current.value;
@@ -94,172 +59,207 @@ export default function EditLactoFerment(props) {
 		const descriptionVal = description.current.value;
 
 		try {
-			const response = await fetch('/api/lactoferments', {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					name: nameVal,
-					description: descriptionVal,
-					volume: {
-						val: volumeValVal,
-						unit: volumeUnitVal
+			const response = await fetch(
+				`/api/lactoferments/${props.match.params.id}`,
+				{
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json'
 					},
-					method: {
-						ferment: {
-							temp: fermentTempVal,
-							duration: fermentDurationVal
-						}
-					},
-					ingredients: {
-						salt: {
-							amount: {
-								value: saltValueVal,
-								unit: saltUnitVal
+					body: JSON.stringify({
+						name: nameVal,
+						description: descriptionVal,
+						volume: {
+							val: volumeValVal,
+							unit: volumeUnitVal
+						},
+						method: {
+							ferment: {
+								temp: fermentTempVal,
+								duration: fermentDurationVal
 							}
 						},
-						main: [
-							{
+						ingredients: {
+							salt: {
 								amount: {
-									value: mainValueVal,
-									unit: mainUnitVal
-								},
-								name: mainNameVal
-							}
-						],
-						other: [
-							{
-								amount: {
-									value: otherValueVal,
-									unit: otherUnitVal
-								},
-								name: otherNameVal
-							}
-						]
-					}
-				})
-			});
+									value: saltValueVal,
+									unit: saltUnitVal
+								}
+							},
+							main: [
+								{
+									amount: {
+										value: mainValueVal,
+										unit: mainUnitVal
+									},
+									name: mainNameVal
+								}
+							],
+							other: [
+								{
+									amount: {
+										value: otherValueVal,
+										unit: otherUnitVal
+									},
+									name: otherNameVal
+								}
+							]
+						}
+					})
+				}
+			);
 			const data = await response.json();
-			setlactoFerment([data]);
+			setlactoFerment(data);
 		} catch (error) {
 			console.error(error);
+		} finally {
+			window.location.assign('/');
 		}
 	};
-	// const handleDelete = async e => {
-	// 	try {
-	// 		const response = await fetch(
-	// 			`/api/lacoferments${props.match.params.id}`,
-	// 			{
-	// 				method: 'DELETE',
-	// 				header: {
-	// 					'Content-Type': 'application/json'
-	// 				}
-	// 			}
-	// 		);
-	// 		const data = await response.json();
-	// 		setDidDelete(!didDelete);
-	// 	} catch (error) {
-	// 		console.error(error);
-	// 	} finally {
-	// 		window.location.assign('/');
-	// 	}
-	// };
+
+	const handleDelete = async (e, props) => {
+		try {
+			const response = await fetch(
+				`/api/lacoferments/${props.match.params.id}`,
+				{
+					method: 'DELETE',
+					header: {
+						'Content-Type': 'application/json'
+					}
+				}
+			);
+			const data = await response.json();
+			setDidDelete(!didDelete);
+		} catch (error) {
+			console.error(error);
+		} // } finally {
+		// 	window.location.assign('/');
+		// }
+	};
+
+	console.log(Object.keys(lactoFerment));
+	console.log(lactoFerment.volume);
+	// this seems to console log twice once as an empty array and undefiend and then as what i expect.
+	// when i add in the next line it bugs out entierly.
+	//console.log(`${lactoFerment[volume].val}`);
+	//${lactoFerment.volume.unit}
 	return (
 		<div className="newLactofermentForm">
 			<form onSubmit={handleSubmit}>
 				<label>
 					Recipe Name
-					<input type="text" ref={name}>
-						{lactoferment.name}
-					</input>
+					<input type="text" ref={name} defaultValue={lactoFerment.name} />
 				</label>
 				<label>
 					Description
-					<input type="text" ref={description}>
-						{lactoferment.description}
-					</input>
+					<input
+						type="text"
+						ref={description}
+						defaultValue={lactoFerment.description}
+					/>
 				</label>
 				<label>
 					Volume amount
-					<input type="number" ref={volumeVal}>
-						{lactoferment.volume.val}
-					</input>
+					<input
+						type="number"
+						ref={volumeVal}
+						//defaultValue={lactoFerment.volume.value}
+					/>
 				</label>
 				<label>
 					Volume unit
-					<input type="text" ref={volumeUnit}>
-						{' '}
-						{lactoferment.volume.unit}{' '}
-					</input>
+					<input
+						type="text"
+						ref={volumeUnit}
+						//defaultValue={lactoferment.Volume.unit}
+					/>
 				</label>
 				<label>
 					Fermentaion temp {`(C)`}
-					<input type="text" ref={fermentTemp}>
-						{lactoferment.method.ferment.temp}
-					</input>
+					<input
+						type="text"
+						ref={fermentTemp}
+						//defaultValue={lactoferment.method.ferment.temp}
+					/>
 				</label>
 				<label>
 					Fermentation duration
-					<input type="text" ref={fermentDuration}>
-						{lactoferment.method.ferment.duration}
-					</input>
+					<input
+						type="text"
+						ref={fermentDuration}
+						//defaultValue={lactoferment.method.ferment.duration}
+					/>
 				</label>
 				<label>
 					Main ingredient
-					<input type="text" ref={mainName}>
-						{lactoferment.ingredients.main[0].name}
-					</input>
+					<input
+						type="text"
+						ref={mainName}
+						//defaultValue={lactoferment.ingredients.main[0].name}
+					/>
 				</label>
 				<label>
 					Main amount
-					<input type="text" ref={mainValue}>
-						{lactoferment.ingredients.main[0].amount.value}
-					</input>
+					<input
+						type="text"
+						ref={mainValue}
+						//defaultValue={lactoferment.ingredients.main[0].amount.value}
+					/>
 				</label>
 				<label>
 					Main unit
-					<input type="text" ref={mainUnit}>
-						{lactoferment.ingredients.main[0].amount.unit}
-					</input>
+					<input
+						type="text"
+						ref={mainUnit}
+						//defaultValue={lactoferment.ingredients.main[0].amount.unit}
+					/>
 				</label>
 				<label>
 					salt amount
 					<input
 						type="number"
 						ref={saltAmount}
-						defaultValue={lactoferment.ingredients.salt.amount.value}
+						//defaultValue={lactoferment.ingredients.salt.amount.value}
 					/>
 				</label>
 				<label>
 					salt unit
-					<input type="text" ref={saltUnit}>
-						{lactoferment.ingredients.salt.amount.unit}
-					</input>
+					<input
+						type="text"
+						ref={saltUnit}
+						//defaultValue={lactoferment.ingredients.salt.amount.unit}
+					/>
 				</label>
 				<label>
 					Other name
-					<input type="text" ref={otherName}>
-						{lactoferment.ingredients.other[0].name}
-					</input>
+					<input
+						type="text"
+						ref={otherName}
+						//defaultValue={lactoferment.ingredients.other[0].name}
+					/>
 				</label>
 				<label>
 					other amount
-					<input type="number" ref={otherValue}>
-						{lactoferment.ingredients.other[0].amount}
-					</input>
+					<input
+						type="number"
+						ref={otherValue}
+						//defaultValue={lactoferment.ingredients.other[0].amount}
+					/>
 				</label>
 				<label>
 					other unit
-					<input type="text" ref={otherUnit}>
-						{lactoferment.ingredients.other[0].unit}
-					</input>
+					<input
+						type="text"
+						ref={otherUnit}
+						//defaultValue={lactoferment.ingredients.other[0].unit}
+					/>
 				</label>
 				<label>
 					update Fermentaion recipe
 					<input type="submit" />
 				</label>
 			</form>
+			<button onClick={handleDelete}> Delete this recipe </button>
 		</div>
 	);
 }

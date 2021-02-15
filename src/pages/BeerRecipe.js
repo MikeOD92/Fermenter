@@ -51,7 +51,7 @@ export default function BeerRecipe(props) {
 					<div>
 						{beer.ingredients.hops.map((item, index) => {
 							return (
-								<div key={`${item.name}${item.index}`}>
+								<div key={`${item.name}${index}`}>
 									<h5>{item.name}</h5> <br />
 									<ul>
 										<li key={`${item.amount.unit}${index}`}>
@@ -72,11 +72,11 @@ export default function BeerRecipe(props) {
 			</div>
 			<div className="instructions">
 				<h3> Yeild</h3>
-				{beer.volume ? (
+				{beer.Volume ? (
 					<div>
 						<p>
 							{' '}
-							Makes : {beer.volume.value} {beer.volume.unit}
+							Makes : {beer.Volume.val} {beer.Volume.unit}
 						</p>
 					</div>
 				) : (

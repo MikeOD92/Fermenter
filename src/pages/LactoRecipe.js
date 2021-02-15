@@ -12,7 +12,8 @@ export default function LactoRecipe(props) {
 				);
 				const data = await response.json();
 				setFerment(data);
-				console.log('looking for the ID', currentFerment._id);
+				console.log(data);
+				console.log('looking for the ID', props.match.params.id);
 			} catch (error) {
 				console.error(error);
 			}
@@ -50,7 +51,7 @@ export default function LactoRecipe(props) {
 					{/* ////// Aromatics */}
 					{currentFerment.name ? (
 						<div>
-							Aromatics:
+							Other ingredients and Aromatics:
 							<ul>
 								{currentFerment.ingredients.other.map(item => {
 									return (
