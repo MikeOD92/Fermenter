@@ -27,11 +27,11 @@ const routes = [
 		key: 'LactoRecipeEdit',
 		path: '/lactoferments/:id/edit'
 	},
-	// {
-	// 	Component: BeerRecipeEdit,
-	// 	key: 'BeerRecipeEdit',
-	// 	path: '/beers/:id/edit'
-	// },
+	{
+		Component: BeerRecipeEdit,
+		key: 'BeerRecipeEdit',
+		path: '/beers/:id/edit'
+	},
 	{
 		Component: LactoRecipe,
 		key: 'LactoRecipe',

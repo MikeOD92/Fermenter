@@ -6,23 +6,21 @@ export default function EditLactoFerment(props) {
 	const [didDelete, setDidDelete] = useState({});
 
 	//////////// Form Ref vars
-
-	const volumeVal = useRef(null);
-	const volumeUnit = useRef(null);
-	const fermentTemp = useRef(null);
-	const fermentDuration = useRef(null);
-	const saltAmount = useRef(null);
-	const saltUnit = useRef(null);
-	const mainName = useRef(null);
-	const mainUnit = useRef(null);
-	const mainValue = useRef(null);
-	const otherName = useRef(null);
-	const otherValue = useRef(null);
-	const otherUnit = useRef(null);
-	const name = useRef(null);
-	const description = useRef(null);
-
-	////////////////// use effect on load
+	const volumeVal = useRef('');
+	const volumeUnit = useRef('');
+	const fermentTemp = useRef('');
+	const fermentDuration = useRef('');
+	const saltAmount = useRef('');
+	const saltUnit = useRef('');
+	const mainName = useRef('');
+	const mainUnit = useRef('');
+	const mainValue = useRef('');
+	const otherName = useRef('');
+	const otherValue = useRef('');
+	const otherUnit = useRef('');
+	const name = useRef('');
+	const description = useRef('');
+	////////////////// use effect on load grabs from api gives us current reciipe
 
 	useEffect(() => {
 		(async () => {
@@ -43,21 +41,6 @@ export default function EditLactoFerment(props) {
 	const handleSubmit = async e => {
 		e.preventDefault;
 
-		const volumeValVal = volumeVal.current.value;
-		const volumeUnitVal = volumeUnit.current.value;
-		const fermentTempVal = fermentTemp.current.value;
-		const fermentDurationVal = fermentDuration.current.value;
-		const saltValueVal = saltAmount.current.value;
-		const saltUnitVal = saltUnit.current.value;
-		const mainNameVal = mainName.current.value;
-		const mainUnitVal = mainUnit.current.value;
-		const mainValueVal = mainValue.current.value;
-		const otherNameVal = otherName.current.value;
-		const otherValueVal = otherValue.current.value;
-		const otherUnitVal = otherUnit.current.value;
-		const nameVal = name.current.value;
-		const descriptionVal = description.current.value;
-
 		try {
 			const response = await fetch(
 				`/api/lactoferments/${props.match.params.id}`,
@@ -67,41 +50,41 @@ export default function EditLactoFerment(props) {
 						'Content-Type': 'application/json'
 					},
 					body: JSON.stringify({
-						name: nameVal,
-						description: descriptionVal,
+						name: name.current.value,
+						description: description.current.value,
 						volume: {
-							val: volumeValVal,
-							unit: volumeUnitVal
+							val: volumeVal.current.value,
+							unit: volumeUnit.current.value
 						},
 						method: {
 							ferment: {
-								temp: fermentTempVal,
-								duration: fermentDurationVal
+								temp: fermentTemp.current.value,
+								duration: fermentDuration.current.value
 							}
 						},
 						ingredients: {
 							salt: {
 								amount: {
-									value: saltValueVal,
-									unit: saltUnitVal
+									value: saltAmount.current.value,
+									unit: saltUnit.current.value
 								}
 							},
 							main: [
 								{
 									amount: {
-										value: mainValueVal,
-										unit: mainUnitVal
+										value: mainValue.current.value,
+										unit: mainUnit.current.value
 									},
-									name: mainNameVal
+									name: mainName.current.value
 								}
 							],
 							other: [
 								{
 									amount: {
-										value: otherValueVal,
-										unit: otherUnitVal
+										value: otherValue.current.value,
+										unit: otherUnit.current.value
 									},
-									name: otherNameVal
+									name: otherName.current.value
 								}
 							]
 						}
@@ -117,14 +100,14 @@ export default function EditLactoFerment(props) {
 		}
 	};
 
-	const handleDelete = async (e, props) => {
+	const handleDelete = async e => {
 		try {
 			const response = await fetch(
 				`/api/lacoferments/${props.match.params.id}`,
 				{
 					method: 'DELETE',
 					header: {
-						'Content-Type': 'application/json'
+						'content-type': 'application/json'
 					}
 				}
 			);
@@ -137,8 +120,8 @@ export default function EditLactoFerment(props) {
 		// }
 	};
 
-	console.log(Object.keys(lactoFerment));
-	console.log(lactoFerment.volume);
+	console.log(lactoFerment);
+	//console.log(lactoFerment);
 	// this seems to console log twice once as an empty array and undefiend and then as what i expect.
 	// when i add in the next line it bugs out entierly.
 	//console.log(`${lactoFerment[volume].val}`);
@@ -171,7 +154,7 @@ export default function EditLactoFerment(props) {
 					<input
 						type="text"
 						ref={volumeUnit}
-						//defaultValue={lactoferment.Volume.unit}
+						//defaultValue={lactoFerment.volume.unit}
 					/>
 				</label>
 				<label>
@@ -179,7 +162,7 @@ export default function EditLactoFerment(props) {
 					<input
 						type="text"
 						ref={fermentTemp}
-						//defaultValue={lactoferment.method.ferment.temp}
+						//defaultValue={lactoFerment.method.ferment.temp}
 					/>
 				</label>
 				<label>

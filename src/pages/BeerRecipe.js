@@ -9,9 +9,7 @@ export default function BeerRecipe(props) {
 			try {
 				const response = await fetch(`/api/beers/${props.match.params.id}`);
 				const data = await response.json();
-				console.log(data.ingredients.malt);
 				setBeer(data);
-				console.log(beer);
 			} catch (error) {
 				console.error(error);
 			}
@@ -34,9 +32,9 @@ export default function BeerRecipe(props) {
 				{/* /////////////////////////////////// */}
 				{beer.ingredients ? (
 					<div>
-						{beer.ingredients.malt.map(item => {
+						{beer.ingredients.malt.map((item, index) => {
 							return (
-								<p key={item.name}>
+								<p key={`${item.name}${index}`}>
 									{' '}
 									{item.name} :: {item.amount.value} {item.amount.unit}
 								</p>
@@ -117,6 +115,7 @@ export default function BeerRecipe(props) {
 					''
 				)}
 			</div>
+			<Link to={`/beers/${beer._id}/edit`}> Update Recipe </Link>
 		</div>
 	);
 }

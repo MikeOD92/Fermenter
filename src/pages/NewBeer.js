@@ -29,28 +29,7 @@ export default function NewBeerForm(props) {
 
 	const handleSubmit = async e => {
 		e.preventDefault;
-		const volumeValVal = volumeVal.current.value;
-		const volumeUnitVal = volumeUnit.current.value;
-		const boilValueVal = boilValue.current.value;
-		const boilUnitVal = boilUnit.current.value;
-		const mashTempVal = mashTemp.current.value;
-		const mashDurationVal = mashDuration.current.value;
-		const fermentTempVal = fermentTemp.current.value;
-		const fermentDurationVal = fermentDuration.current.value;
-		const maltValueVal = maltValue.current.value;
-		const maltunitVal = maltunit.current.value;
-		const maltNameVal = maltName.current.value;
-		const hopValueVal = hopValue.current.value;
-		const hopUnitVal = hopUnit.current.value;
-		const hopNameVal = hopName.current.value;
-		const hopAddVal = hopAdd.current.value;
-		const hopAttrVal = hopAttr.current.value;
-		const yeastVal = yeast.current.value;
-		const nameVal = name.current.value;
-		const styleVal = style.current.value;
-		const descriptionVal = description.current.value;
-		const abvVal = abv.current.value;
-		const ibuVal = ibu.current.value;
+
 		try {
 			const response = await fetch('/api/beers', {
 				method: 'POST',
@@ -58,51 +37,51 @@ export default function NewBeerForm(props) {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
-					name: nameVal,
-					style: styleVal,
-					description: descriptionVal,
-					abv: abvVal,
-					ibu: ibuVal,
+					name: name.current.value,
+					style: style.current.value,
+					description: description.current.value,
+					abv: abv.current.value,
+					ibu: ibu.current.value,
 					Volume: {
-						val: volumeValVal,
-						unit: volumeUnitVal
+						val: volumeVal.current.value,
+						unit: volumeUnit.current.value
 					},
 					boil: {
-						value: boilValueVal,
-						unit: boilUnitVal
+						value: boilValue.current.value,
+						unit: boilUnit.current.value
 					},
 					method: {
 						mash: {
-							temp: mashTempVal,
-							duration: mashDurationVal
+							temp: mashTemp.current.value,
+							duration: mashDuration.current.value
 						},
 						ferment: {
-							temp: fermentTempVal,
-							time: fermentDurationVal
+							temp: fermentTemp.current.value,
+							time: fermentDuration.current.value
 						}
 					},
 					ingredients: {
 						malt: [
 							{
 								amount: {
-									value: maltValueVal,
-									unit: maltunitVal
+									value: maltValue.current.value,
+									unit: maltunit.current.value
 								},
-								name: maltNameVal
+								name: maltName.current.value
 							}
 						],
 						hops: [
 							{
 								amount: {
-									value: hopValueVal,
-									unit: hopUnitVal
+									value: hopValue.current.value,
+									unit: hopUnit.current.value
 								},
-								name: hopNameVal,
-								add: hopAddVal,
-								attribute: hopAttrVal
+								name: hopName.current.value,
+								add: hopAdd.current.value,
+								attribute: hopAttr.current.value
 							}
 						],
-						yeast: yeastVal
+						yeast: yeast.current.value
 					}
 				})
 			});
