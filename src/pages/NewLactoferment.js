@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
 
 export default function NewLactoFerment(props) {
 	const [lactoferments, setlactoFerments] = useState([]);
@@ -20,21 +19,7 @@ export default function NewLactoFerment(props) {
 	const description = useRef(null);
 
 	const handleSubmit = async e => {
-		e.preventDefault;
-		const volumeValVal = volumeVal.current.value;
-		const volumeUnitVal = volumeUnit.current.value;
-		const fermentTempVal = fermentTemp.current.value;
-		const fermentDurationVal = fermentDuration.current.value;
-		const saltValueVal = saltAmount.current.value;
-		const saltUnitVal = saltUnit.current.value;
-		const mainNameVal = mainName.current.value;
-		const mainUnitVal = mainUnit.current.value;
-		const mainValueVal = mainValue.current.value;
-		const otherNameVal = otherName.current.value;
-		const otherValueVal = otherValue.current.value;
-		const otherUnitVal = otherUnit.current.value;
-		const nameVal = name.current.value;
-		const descriptionVal = description.current.value;
+		e.preventDefault();
 
 		try {
 			const response = await fetch('/api/lactoferments', {
@@ -43,50 +28,51 @@ export default function NewLactoFerment(props) {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
-					name: nameVal,
-					description: descriptionVal,
+					name: name.current.value,
+					description: description.current.value,
 					volume: {
-						val: volumeValVal,
-						unit: volumeUnitVal
+						value: volumeVal.current.value,
+						unit: volumeUnit.current.value
 					},
 					method: {
 						ferment: {
-							temp: fermentTempVal,
-							duration: fermentDurationVal
+							temp: fermentTemp.current.value,
+							duration: fermentDuration.current.value
 						}
 					},
 					ingredients: {
 						salt: {
 							amount: {
-								value: saltValueVal,
-								unit: saltUnitVal
+								value: saltAmount.current.value,
+								unit: saltUnit.current.value
 							}
 						},
 						main: [
 							{
 								amount: {
-									value: mainValueVal,
-									unit: mainUnitVal
+									value: mainValue.current.value,
+									unit: mainUnit.current.value
 								},
-								name: mainNameVal
+								name: mainName.current.value
 							}
 						],
 						other: [
 							{
 								amount: {
-									value: otherValueVal,
-									unit: otherUnitVal
+									value: otherValue.current.value,
+									unit: otherUnit.current.value
 								},
-								name: otherNameVal
+								name: otherName.current.value
 							}
 						]
 					}
 				})
 			});
-			const data = await response.json();
-			setlactoFerments([...lactoferments, data]);
+			setlactoFerments([data, ...lactoferments]);
 		} catch (error) {
 			console.error(error);
+		} finally {
+			window.location.assign('/');
 		}
 	};
 	return (

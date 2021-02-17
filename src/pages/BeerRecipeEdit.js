@@ -42,7 +42,7 @@ export default function NewBeerForm(props) {
 	const ibu = useRef(null);
 
 	const handleSubmit = async e => {
-		e.preventDefault;
+		e.preventDefault();
 
 		try {
 			const response = await fetch(`/api/beers/${props.match.params.id}`, {
@@ -56,8 +56,8 @@ export default function NewBeerForm(props) {
 					description: description.current.value,
 					abv: abv.current.value,
 					ibu: ibu.current.value,
-					Volume: {
-						val: volumeVal.current.value,
+					volume: {
+						value: volumeVal.current.value,
 						unit: volumeUnit.current.value
 					},
 					boil: {
@@ -104,7 +104,7 @@ export default function NewBeerForm(props) {
 		} catch (error) {
 			console.error(error);
 		} finally {
-			window.location.assign('/beers'); /// Don't know why this doesn't work it works on delete button
+			window.location.assign('/beers');
 		}
 	};
 
@@ -118,14 +118,13 @@ export default function NewBeerForm(props) {
 				}
 			});
 			const data = await response.json();
-			setDidDelete(!didDelete);
 		} catch (error) {
 			console.error(error);
 		} finally {
 			window.location.assign('/');
 		}
 	};
-
+	console.log(beer);
 	return (
 		<div className="newbeerForm">
 			<form onSubmit={handleSubmit}>
@@ -153,142 +152,206 @@ export default function NewBeerForm(props) {
 					ibu
 					<input type="number" ref={ibu} defaultValue={beer.ibu} />
 				</label>
-				<label>
-					Volume amount
-					<input
-						type="number"
-						ref={volumeVal}
-						//defaultValue={beer.volume.val}
-					/>
-				</label>
-				<label>
-					Volume unit
-					<input
-						type="text"
-						ref={volumeUnit}
-						//defaultValue={beer.Volume.unit}
-					/>
-				</label>
-				<label>
-					Boil amount
-					<input
-						type="number"
-						ref={boilValue}
-						//defaultValue={beer.boil.value}
-					/>
-				</label>
-				<label>
-					Boil unit
-					<input
-						type="text"
-						ref={boilUnit}
-						//defaultValue={beer.boil.unit}
-					/>
-				</label>
-				<label>
-					Mash tempature
-					<input
-						type="number"
-						ref={mashTemp}
-						//defaultValue={beer.method.mash.temp}
-					/>
-				</label>
-				<label>
-					Mash duration {'(mins)'}
-					<input
-						type="number"
-						ref={mashDuration}
-						//defaultValue={beer.method.mash.duration}
-					/>
-				</label>
-				<label>
-					Fermentaion temp {`(C)`}
-					<input
-						type="text"
-						ref={fermentTemp}
-						//defaultValue={beer.method.ferment.temp}
-					/>
-				</label>
-				<label>
-					Fermentation duration
-					<input
-						type="text"
-						ref={fermentDuration}
-						//defaultValue={beer.method.ferment.time}
-					/>
-				</label>
-				<label>
-					Malt name
-					<input
-						type="text"
-						ref={maltName}
-						//defaultValue={beer.ingredients.malt[0].name}
-					/>
-				</label>
-				<label>
-					Malt amount
-					<input
-						type="number"
-						ref={maltValue}
-						//defaultValue={beer.ingredients.malt[0].amount.value}
-					/>
-				</label>
-				<label>
-					Malt unit
-					<input
-						type="text"
-						ref={maltunit}
-						//defaultValue={beer.ingredients.malt[0].amount.unit}
-					/>
-				</label>
-				<label>
-					Hop Name
-					<input
-						type="text"
-						ref={hopName}
-						//defaultValue={beer.ingredients.hops[0].name}
-					/>
-				</label>
-				<label>
-					Hop amount
-					<input
-						type="number"
-						ref={hopValue}
-						//defaultValue={beer.ingredients.hops[0].amount.value}
-					/>
-				</label>
-				<label>
-					Hop unit
-					<input
-						type="text"
-						ref={hopUnit}
-						//defaultValue={beer.ingredients.hops[0].amount.unit}
-					/>
-				</label>
-				<label>
-					Hop add
-					<input
-						type="text"
-						ref={hopAdd}
-						//defaultValue={beer.ingredients.hops[0].add}
-					/>
-				</label>
-				<label>
-					Hop attribute
-					<input
-						type="text"
-						ref={hopAttr}
-						//defaultValue={beer.ingredients.hops[0].attribute}
-					/>
-				</label>
-				<label>
-					yeast
-					<input
-						type="text"
-						ref={yeast}
-						//defaultValue={beer.ingredients.yeast}
-					/>
-				</label>
+				{Object.keys(beer).length > 1 ? (
+					<label>
+						Volume amount
+						<input
+							type="number"
+							ref={volumeVal}
+							defaultValue={beer.volume.value}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(beer).length > 1 ? (
+					<label>
+						Volume unit
+						<input
+							type="text"
+							ref={volumeUnit}
+							defaultValue={beer.volume.unit}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(beer).length > 1 ? (
+					<label>
+						Boil amount
+						<input
+							type="number"
+							ref={boilValue}
+							defaultValue={beer.boil.value}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(beer).length > 1 ? (
+					<label>
+						Boil unit
+						<input type="text" ref={boilUnit} defaultValue={beer.boil.unit} />
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(beer).length > 1 ? (
+					<label>
+						Mash tempature
+						<input
+							type="number"
+							ref={mashTemp}
+							defaultValue={beer.method.mash.temp}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(beer).length > 1 ? (
+					<label>
+						Mash duration {'(mins)'}
+						<input
+							type="number"
+							ref={mashDuration}
+							defaultValue={beer.method.mash.duration}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(beer).length > 1 ? (
+					<label>
+						Fermentaion temp {`(C)`}
+						<input
+							type="text"
+							ref={fermentTemp}
+							defaultValue={beer.method.ferment.temp}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(beer).length > 1 ? (
+					<label>
+						Fermentation duration
+						<input
+							type="text"
+							ref={fermentDuration}
+							defaultValue={beer.method.ferment.time}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(beer).length > 1 ? (
+					<label>
+						Malt name
+						<input
+							type="text"
+							ref={maltName}
+							defaultValue={beer.ingredients.malt[0].name}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(beer).length > 1 ? (
+					<label>
+						Malt amount
+						<input
+							type="number"
+							ref={maltValue}
+							defaultValue={beer.ingredients.malt[0].amount.value}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(beer).length > 1 ? (
+					<label>
+						Malt unit
+						<input
+							type="text"
+							ref={maltunit}
+							defaultValue={beer.ingredients.malt[0].amount.unit}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(beer).length > 1 ? (
+					<label>
+						Hop Name
+						<input
+							type="text"
+							ref={hopName}
+							defaultValue={beer.ingredients.hops[0].name}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(beer).length > 1 ? (
+					<label>
+						Hop amount
+						<input
+							type="number"
+							ref={hopValue}
+							defaultValue={beer.ingredients.hops[0].amount.value}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(beer).length > 1 ? (
+					<label>
+						Hop unit
+						<input
+							type="text"
+							ref={hopUnit}
+							defaultValue={beer.ingredients.hops[0].amount.unit}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(beer).length > 1 ? (
+					<label>
+						Hop add
+						<input
+							type="text"
+							ref={hopAdd}
+							defaultValue={beer.ingredients.hops[0].add}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(beer).length > 1 ? (
+					<label>
+						Hop attribute
+						<input
+							type="text"
+							ref={hopAttr}
+							defaultValue={beer.ingredients.hops[0].attribute}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(beer).length > 1 ? (
+					<label>
+						yeast
+						<input
+							type="text"
+							ref={yeast}
+							defaultValue={beer.ingredients.yeast}
+						/>
+					</label>
+				) : (
+					''
+				)}
 				<label>
 					Create beer recipe
 					<input type="submit" />

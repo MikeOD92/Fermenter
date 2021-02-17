@@ -70,11 +70,11 @@ export default function BeerRecipe(props) {
 			</div>
 			<div className="instructions">
 				<h3> Yeild</h3>
-				{beer.Volume ? (
+				{beer.volume ? (
 					<div>
 						<p>
 							{' '}
-							Makes : {beer.Volume.val} {beer.Volume.unit}
+							Makes : {beer.volume.value} {beer.volume.unit}
 						</p>
 					</div>
 				) : (
@@ -115,7 +115,7 @@ export default function BeerRecipe(props) {
 					''
 				)}
 			</div>
-			<Link to={`/beers/${beer._id}/edit`}> Update Recipe </Link>
+			<Link to={`/beers/${props.match.params.id}/edit`}> Update Recipe </Link>
 		</div>
 	);
 }

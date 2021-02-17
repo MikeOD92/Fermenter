@@ -6,8 +6,8 @@ const beerSchema = new Schema({
     description: String, 
     abv: Number,
     ibu: Number,
-    Volume: {
-      val: Number, 
+    volume: {
+      value: Number, 
       unit: String
     },
     boil:{

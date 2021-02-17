@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
 
 export default function NewBeerForm(props) {
 	const [beers, setBeers] = useState([]);
@@ -28,7 +27,7 @@ export default function NewBeerForm(props) {
 	const ibu = useRef(null);
 
 	const handleSubmit = async e => {
-		e.preventDefault;
+		e.preventDefault();
 
 		try {
 			const response = await fetch('/api/beers', {
@@ -42,8 +41,8 @@ export default function NewBeerForm(props) {
 					description: description.current.value,
 					abv: abv.current.value,
 					ibu: ibu.current.value,
-					Volume: {
-						val: volumeVal.current.value,
+					volume: {
+						value: volumeVal.current.value,
 						unit: volumeUnit.current.value
 					},
 					boil: {
@@ -86,9 +85,11 @@ export default function NewBeerForm(props) {
 				})
 			});
 			const data = await response.json();
-			setBeers([...beers, data]);
+			setBeers([data]);
 		} catch (error) {
 			console.error(error);
+		} finally {
+			window.location.assign('/');
 		}
 	};
 	return (

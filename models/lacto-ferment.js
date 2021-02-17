@@ -5,7 +5,7 @@ const lactoFermentSchema = new Schema({
 	name: String, 
 	description: String, 
 	volume:{
-		val:Number,
+		value:Number,
 		unit: String
 	},
 	method: {

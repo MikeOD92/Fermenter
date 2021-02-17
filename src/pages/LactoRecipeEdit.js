@@ -3,23 +3,22 @@ import { Link } from 'react-router-dom';
 
 export default function EditLactoFerment(props) {
 	const [lactoFerment, setlactoFerment] = useState({});
-	const [didDelete, setDidDelete] = useState({});
 
 	//////////// Form Ref vars
-	const volumeVal = useRef('');
-	const volumeUnit = useRef('');
-	const fermentTemp = useRef('');
-	const fermentDuration = useRef('');
-	const saltAmount = useRef('');
-	const saltUnit = useRef('');
-	const mainName = useRef('');
-	const mainUnit = useRef('');
-	const mainValue = useRef('');
-	const otherName = useRef('');
-	const otherValue = useRef('');
-	const otherUnit = useRef('');
-	const name = useRef('');
-	const description = useRef('');
+	const volumeVal = useRef(null);
+	const volumeUnit = useRef(null);
+	const fermentTemp = useRef(null);
+	const fermentDuration = useRef(null);
+	const saltAmount = useRef(null);
+	const saltUnit = useRef(null);
+	const mainName = useRef(null);
+	const mainUnit = useRef(null);
+	const mainValue = useRef(null);
+	const otherName = useRef(null);
+	const otherValue = useRef(null);
+	const otherUnit = useRef(null);
+	const name = useRef(null);
+	const description = useRef(null);
 	////////////////// use effect on load grabs from api gives us current reciipe
 
 	useEffect(() => {
@@ -39,7 +38,7 @@ export default function EditLactoFerment(props) {
 	///////////handle submit
 
 	const handleSubmit = async e => {
-		e.preventDefault;
+		e.preventDefault();
 
 		try {
 			const response = await fetch(
@@ -47,13 +46,13 @@ export default function EditLactoFerment(props) {
 				{
 					method: 'PUT',
 					headers: {
-						'Content-Type': 'application/json'
+						'content-Type': 'application/json'
 					},
 					body: JSON.stringify({
 						name: name.current.value,
 						description: description.current.value,
 						volume: {
-							val: volumeVal.current.value,
+							value: volumeVal.current.value,
 							unit: volumeUnit.current.value
 						},
 						method: {
@@ -96,28 +95,29 @@ export default function EditLactoFerment(props) {
 		} catch (error) {
 			console.error(error);
 		} finally {
-			window.location.assign('/');
+			window.location.assign('/lactoferments');
 		}
 	};
 
 	const handleDelete = async e => {
+		e.preventDefault();
+
 		try {
 			const response = await fetch(
-				`/api/lacoferments/${props.match.params.id}`,
+				`/api/lactoferments/${props.match.params.id}`,
 				{
 					method: 'DELETE',
 					header: {
-						'content-type': 'application/json'
+						'content-Type': 'application/json'
 					}
 				}
 			);
 			const data = await response.json();
-			setDidDelete(!didDelete);
 		} catch (error) {
 			console.error(error);
-		} // } finally {
-		// 	window.location.assign('/');
-		// }
+		} finally {
+			window.location.assign('/');
+		}
 	};
 
 	console.log(lactoFerment);
@@ -141,102 +141,150 @@ export default function EditLactoFerment(props) {
 						defaultValue={lactoFerment.description}
 					/>
 				</label>
-				<label>
-					Volume amount
-					<input
-						type="number"
-						ref={volumeVal}
-						//defaultValue={lactoFerment.volume.value}
-					/>
-				</label>
-				<label>
-					Volume unit
-					<input
-						type="text"
-						ref={volumeUnit}
-						//defaultValue={lactoFerment.volume.unit}
-					/>
-				</label>
-				<label>
-					Fermentaion temp {`(C)`}
-					<input
-						type="text"
-						ref={fermentTemp}
-						//defaultValue={lactoFerment.method.ferment.temp}
-					/>
-				</label>
-				<label>
-					Fermentation duration
-					<input
-						type="text"
-						ref={fermentDuration}
-						//defaultValue={lactoferment.method.ferment.duration}
-					/>
-				</label>
-				<label>
-					Main ingredient
-					<input
-						type="text"
-						ref={mainName}
-						//defaultValue={lactoferment.ingredients.main[0].name}
-					/>
-				</label>
-				<label>
-					Main amount
-					<input
-						type="text"
-						ref={mainValue}
-						//defaultValue={lactoferment.ingredients.main[0].amount.value}
-					/>
-				</label>
-				<label>
-					Main unit
-					<input
-						type="text"
-						ref={mainUnit}
-						//defaultValue={lactoferment.ingredients.main[0].amount.unit}
-					/>
-				</label>
-				<label>
-					salt amount
-					<input
-						type="number"
-						ref={saltAmount}
-						//defaultValue={lactoferment.ingredients.salt.amount.value}
-					/>
-				</label>
-				<label>
-					salt unit
-					<input
-						type="text"
-						ref={saltUnit}
-						//defaultValue={lactoferment.ingredients.salt.amount.unit}
-					/>
-				</label>
-				<label>
-					Other name
-					<input
-						type="text"
-						ref={otherName}
-						//defaultValue={lactoferment.ingredients.other[0].name}
-					/>
-				</label>
-				<label>
-					other amount
-					<input
-						type="number"
-						ref={otherValue}
-						//defaultValue={lactoferment.ingredients.other[0].amount}
-					/>
-				</label>
-				<label>
-					other unit
-					<input
-						type="text"
-						ref={otherUnit}
-						//defaultValue={lactoferment.ingredients.other[0].unit}
-					/>
-				</label>
+				{Object.keys(lactoFerment).length > 1 ? (
+					<label>
+						Volume amount
+						<input
+							type="number"
+							ref={volumeVal}
+							defaultValue={lactoFerment.volume.value}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(lactoFerment).length > 1 ? (
+					<label>
+						Volume unit
+						<input
+							type="text"
+							ref={volumeUnit}
+							defaultValue={lactoFerment.volume.unit}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(lactoFerment).length > 1 ? (
+					<label>
+						Fermentaion temp {`(C)`}
+						<input
+							type="text"
+							ref={fermentTemp}
+							defaultValue={lactoFerment.method.ferment.temp}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(lactoFerment).length > 1 ? (
+					<label>
+						Fermentation duration
+						<input
+							type="text"
+							ref={fermentDuration}
+							defaultValue={lactoFerment.method.ferment.duration}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(lactoFerment).length > 1 ? (
+					<label>
+						Main ingredient
+						<input
+							type="text"
+							ref={mainName}
+							defaultValue={lactoFerment.ingredients.main[0].name}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(lactoFerment).length > 1 ? (
+					<label>
+						Main amount
+						<input
+							type="text"
+							ref={mainValue}
+							defaultValue={lactoFerment.ingredients.main[0].amount.value}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(lactoFerment).length > 1 ? (
+					<label>
+						Main unit
+						<input
+							type="text"
+							ref={mainUnit}
+							defaultValue={lactoFerment.ingredients.main[0].amount.unit}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(lactoFerment).length > 1 ? (
+					<label>
+						salt amount
+						<input
+							type="number"
+							ref={saltAmount}
+							defaultValue={lactoFerment.ingredients.salt.amount.value}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(lactoFerment).length > 1 ? (
+					<label>
+						salt unit
+						<input
+							type="text"
+							ref={saltUnit}
+							defaultValue={lactoFerment.ingredients.salt.amount.unit}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(lactoFerment).length > 1 ? (
+					<label>
+						Other name
+						<input
+							type="text"
+							ref={otherName}
+							defaultValue={lactoFerment.ingredients.other[0].name}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(lactoFerment).length > 1 ? (
+					<label>
+						other amount
+						<input
+							type="number"
+							ref={otherValue}
+							defaultValue={lactoFerment.ingredients.other[0].amount.value}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(lactoFerment).length > 1 ? (
+					<label>
+						other unit
+						<input
+							type="text"
+							ref={otherUnit}
+							defaultValue={lactoFerment.ingredients.other[0].amount.unit}
+						/>
+					</label>
+				) : (
+					''
+				)}
 				<label>
 					update Fermentaion recipe
 					<input type="submit" />

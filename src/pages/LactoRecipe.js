@@ -72,7 +72,7 @@ export default function LactoRecipe(props) {
 						{currentFerment.volume ? (
 							<div>
 								<h4> Volume </h4>
-								{currentFerment.volume.val} - {currentFerment.volume.unit}
+								{currentFerment.volume.value} - {currentFerment.volume.unit}
 							</div>
 						) : (
 							''
@@ -100,7 +100,7 @@ export default function LactoRecipe(props) {
 					''
 				)}
 			</div>
-			<Link to={`/lactoferments/${currentFerment._id}/edit`}>
+			<Link to={`/lactoferments/${props.match.params.id}/edit`}>
 				{' '}
 				Update Recipe{' '}
 			</Link>
