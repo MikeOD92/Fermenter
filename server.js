@@ -24,6 +24,7 @@ if (process.env.NODE_ENV !== 'development'){
 //// API controlers starts here
 app.use('/api/beers', require('./controllers/beers'));
 app.use('/api/lactoferments', require('./controllers/lactoFerments'))
+app.use('/api/brewlogs', require('./controllers/brewerLogs'))
 
 
 //LISTENER

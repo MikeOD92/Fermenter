@@ -116,6 +116,22 @@ export default function BeerRecipe(props) {
 				)}
 			</div>
 			<Link to={`/beers/${props.match.params.id}/edit`}> Update Recipe </Link>
+			<div>
+				<h2> Notes:</h2>
+				<ul>
+					{beer.notes && beer.notes.length
+						? beer.notes.map(note => {
+								return (
+									<li key={note._id}>
+										<h4> {note.title}</h4>
+										<p>{note.notes}</p>
+										<small>{note.createdAt}</small>
+									</li>
+								);
+						  })
+						: ''}
+				</ul>
+			</div>
 		</div>
 	);
 }

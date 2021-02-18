@@ -2,7 +2,6 @@ const {Schema, model} = require('mongoose');
 
 const logSchema = new Schema({
     title: String, 
-    variations: String,
     notes: String,
 },{
     timestamps: true

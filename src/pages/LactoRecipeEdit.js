@@ -1,15 +1,9 @@
 import { set } from 'mongoose';
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import MainIngredientForm from '../components/MainIngredientForm';
 
 export default function EditLactoFerment(props) {
 	const [lactoFerment, setlactoFerment] = useState({});
-	// const [mainIngredients, setMainIngredients] = useState([]);
-	// const{
-	// 	value: newMainIngredient,
-	// 	bind: bindNewMainIngredient
-	// } = useInput('')
 
 	//////////// Form Ref vars
 	const volumeVal = useRef(null);
@@ -341,9 +335,9 @@ export default function EditLactoFerment(props) {
 							<input
 								type="text"
 								ref={mainUnit3}
-								defaultValue={
-									lactoFerment.ingredients.main[2].amount.unit || ''
-								}
+								 defaultValue={
+								 	lactoFerment.ingredients.main[2].amount.unit || ''
+								 }
 							/>
 						</label>
 					</div>
@@ -396,7 +390,7 @@ export default function EditLactoFerment(props) {
 							Main 5
 							<input
 								type="text"
-								ref={mainName}
+								ref={mainName5}
 								defaultValue={lactoFerment.ingredients.main[4].name || ''}
 							/>
 						</label>
@@ -404,7 +398,7 @@ export default function EditLactoFerment(props) {
 							Main 5 amount
 							<input
 								type="text"
-								ref={mainValue}
+								ref={mainValue5}
 								defaultValue={
 									lactoFerment.ingredients.main[4].amount.value || ''
 								}
@@ -414,7 +408,7 @@ export default function EditLactoFerment(props) {
 							Main 5 unit
 							<input
 								type="text"
-								ref={mainUnit}
+								ref={mainUnit5}
 								defaultValue={
 									lactoFerment.ingredients.main[4].amount.unit || ''
 								}
@@ -423,8 +417,8 @@ export default function EditLactoFerment(props) {
 					</div>
 				) : (
 					''
-				)}
-				 */}
+				)} */}
+
 				{/* ////////////////////// */}
 				{Object.keys(lactoFerment).length > 1 ? (
 					<label>
