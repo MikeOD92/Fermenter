@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function BeerRecipe(props) {
 	const [beer, setBeer] = useState({});
+	const [logs, updateLogs] = useState([]);
 
 	useEffect(() => {
 		(async () => {
@@ -10,12 +11,55 @@ export default function BeerRecipe(props) {
 				const response = await fetch(`/api/beers/${props.match.params.id}`);
 				const data = await response.json();
 				setBeer(data);
+				updateLogs([...data.notes]);
 			} catch (error) {
 				console.error(error);
 			}
 		})();
-	}, []);
+	}, [][logs]);
 
+	const noteTitle = useRef(null);
+	const notes = useRef(null);
+
+	const handleNoteSubmit = async e => {
+		e.preventDefault();
+		try {
+			const response = await fetch('/api/brewlogs', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					title: noteTitle.current.value,
+					notes: notes.current.value,
+					beerID: beer._id
+				})
+			});
+			const data = await response.json();
+			updateLogs([data]);
+		} catch (error) {
+			console.error(error);
+		} finally {
+			noteTitle.current.value = '';
+			notes.current.value = '';
+		}
+	};
+
+	const deleteNote = async e => {
+		e.preventDefault();
+		try {
+			const response = await fetch(`/api/brewlogs/${e.target.id}`, {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+			const data = await response.json();
+			updateLogs([data]);
+		} catch (error) {
+			console.error(error);
+		}
+	};
 	return (
 		<div>
 			<div className="recipe-head">
@@ -118,14 +162,29 @@ export default function BeerRecipe(props) {
 			<Link to={`/beers/${props.match.params.id}/edit`}> Update Recipe </Link>
 			<div>
 				<h2> Notes:</h2>
+				<form onSubmit={handleNoteSubmit}>
+					<label>
+						Title:
+						<input type="text" ref={noteTitle} />
+					</label>
+					<label>
+						Notes:
+						<input type="text-area" ref={notes} />
+					</label>
+					<input type="submit" vale="add notes" />
+				</form>
+
 				<ul>
-					{beer.notes && beer.notes.length
-						? beer.notes.map(note => {
+					{beer.notes
+						? beer.notes.map((note, index) => {
 								return (
-									<li key={note._id}>
+									<li key={`${note._id}${index}`}>
 										<h4> {note.title}</h4>
 										<p>{note.notes}</p>
 										<small>{note.createdAt}</small>
+										<button onClick={deleteNote} id={note._id}>
+											Remove note
+										</button>
 									</li>
 								);
 						  })

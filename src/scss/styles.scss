@@ -3,27 +3,14 @@
 
 body {
   font-size: 16px;
+  //background: url('https://images.pexels.com/photos/1568757/pexels-photo-1568757.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
+  //background-size:cover ;
 }
 
 .NavBar {
   display: flex;
   justify-content: space-around;
   width: 100%;
-  background-color: #f0f0f0;
+  background-color: rgba(255,255,225,0.4);
 }
 
-.HomePage {
-
-}
-
-.AboutPage {
-
-}
-
-.ContactPage{
-
-}
-
-.AppPage {
-
-}

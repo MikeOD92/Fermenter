@@ -60,7 +60,7 @@ export default function LactoRecipe(props) {
 					{/* ////// Aromatics */}
 					{currentFerment.name ? (
 						<div>
-							Other ingredients and Aromatics:
+							<h4>Other ingredients | Spice | Aromatics:</h4>
 							<ul>
 								{currentFerment.ingredients.other.map(item => {
 									return (

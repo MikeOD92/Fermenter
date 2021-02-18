@@ -28,7 +28,7 @@ beerRouter.get('/', async(req,res)=>{
 //Show
 beerRouter.get('/:id', async(req,res) => {
     try{
-        const foundBeer = await Beer.findById(req.params.id);
+        const foundBeer = await Beer.findById(req.params.id).populate('notes');
         res
             .status(200)
             .json(foundBeer)
@@ -50,7 +50,7 @@ beerRouter.delete('/:id', async(req,res)=>{
 //Update
 beerRouter.put('/:id', async (req,res)=>{
     try{
-        const foundBeer = await Beer.findByIdAndUpdate(req.params.id, req.body, {new:true});
+        const foundBeer = await Beer.findByIdAndUpdate(req.params.id, req.body, {new:true}).populate('notes');
             res
                 .status(200)
                 .json(foundBeer)

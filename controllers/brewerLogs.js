@@ -28,7 +28,7 @@ brewLogRouter.post('/', async (req,res)=>{
 /// Index
 brewLogRouter.get('/', async (req,res)=>{
     try{
-        const foundLogs = await BrewLog.find({})//.populate('logs);
+        const foundLogs = await BrewLog.find({})
         res
             .status(200)
             .json(foundLogs)
@@ -41,7 +41,7 @@ brewLogRouter.get('/', async (req,res)=>{
 
 brewLogRouter.get('/:id', async(req,res)=>{
     try{
-        const foundLog = await BrewLog.findById(req.params.id)//.populate('logs');
+        const foundLog = await BrewLog.findById(req.params.id)
         res
             .status(200)
             .json(foundLog)
@@ -54,7 +54,7 @@ brewLogRouter.get('/:id', async(req,res)=>{
 
 //Destoy
 
-brewLogRouter.delete('/id', async (req,res)=>{
+brewLogRouter.delete('/:id', async (req,res)=>{
     try{
         const foundLog = await BrewLog.findByIdAndDelete(req.params.id)
             res
@@ -71,7 +71,7 @@ brewLogRouter.delete('/id', async (req,res)=>{
 
 brewLogRouter.put('/id', async (req,res)=>{
     try{
-        const foundLog = await BrewLog.findByIdAndUpdate(req.params.id, req.body, {new:true})//.populate('notes)
+        const foundLog = await BrewLog.findByIdAndUpdate(req.params.id, req.body, {new:true})
         res
             .status(200)
             .json(foundLog)
