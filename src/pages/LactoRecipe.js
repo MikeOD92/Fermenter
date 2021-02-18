@@ -29,7 +29,16 @@ export default function LactoRecipe(props) {
 			<div className="recipe-body">
 				<h4> ingredients </h4>
 				<div>
-					{currentFerment.name ? (
+					{currentFerment.name
+						? currentFerment.ingredients.main.map((item, index) => {
+								return (
+									<li key={`${item.name}${index}`}>
+										{item.name} :: {item.amount.value} {item.amount.unit}
+									</li>
+								);
+						  })
+						: ''}
+					{/* {currentFerment.name ? (
 						<li key={`firstIngredent${currentFerment._id}`}>
 							{' '}
 							{currentFerment.ingredients.main[0].name} ::{' '}
@@ -38,11 +47,11 @@ export default function LactoRecipe(props) {
 						</li>
 					) : (
 						''
-					)}
+					)} */}
 					{/* ////Salt */}
 					{currentFerment.name ? (
 						<li key={`Salt${currentFerment._id}`}>
-							Salt:: {currentFerment.ingredients.salt.amount.value}{' '}
+							Salt :: {currentFerment.ingredients.salt.amount.value}{' '}
 							{currentFerment.ingredients.salt.amount.unit}
 						</li>
 					) : (

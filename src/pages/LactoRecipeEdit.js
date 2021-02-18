@@ -1,8 +1,15 @@
+import { set } from 'mongoose';
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import MainIngredientForm from '../components/MainIngredientForm';
 
 export default function EditLactoFerment(props) {
 	const [lactoFerment, setlactoFerment] = useState({});
+	// const [mainIngredients, setMainIngredients] = useState([]);
+	// const{
+	// 	value: newMainIngredient,
+	// 	bind: bindNewMainIngredient
+	// } = useInput('')
 
 	//////////// Form Ref vars
 	const volumeVal = useRef(null);
@@ -11,9 +18,27 @@ export default function EditLactoFerment(props) {
 	const fermentDuration = useRef(null);
 	const saltAmount = useRef(null);
 	const saltUnit = useRef(null);
+	////////////////////////////////////these are the 5 main ingredient slots.
 	const mainName = useRef(null);
 	const mainUnit = useRef(null);
 	const mainValue = useRef(null);
+
+	// const mainName2 = useRef(null);
+	// const mainUnit2 = useRef(null);
+	// const mainValue2 = useRef(null);
+
+	// const mainName3 = useRef(null);
+	// const mainUnit3 = useRef(null);
+	// const mainValue3 = useRef(null);
+
+	// const mainName4 = useRef(null);
+	// const mainUnit4 = useRef(null);
+	// const mainValue4 = useRef(null);
+
+	// const mainName5 = useRef(null);
+	// const mainUnit5 = useRef(null);
+	// const mainValue5 = useRef(null);
+	//////////////////////////////////////
 	const otherName = useRef(null);
 	const otherValue = useRef(null);
 	const otherUnit = useRef(null);
@@ -29,6 +54,7 @@ export default function EditLactoFerment(props) {
 				);
 				const data = await response.json();
 				setlactoFerment(data);
+				//setMainIngredients(data.ingredients.main);
 			} catch (error) {
 				console.error(error);
 			}
@@ -68,6 +94,7 @@ export default function EditLactoFerment(props) {
 									unit: saltUnit.current.value
 								}
 							},
+							//////////////////////
 							main: [
 								{
 									amount: {
@@ -76,6 +103,34 @@ export default function EditLactoFerment(props) {
 									},
 									name: mainName.current.value
 								}
+								// {
+								// 	amount: {
+								// 		value: mainValue2.current.value,
+								// 		unit: mainUnit2.current.value
+								// 	},
+								// 	name: mainName2.current.value
+								// },
+								// {
+								// 	amount: {
+								// 		value: mainValue3.current.value,
+								// 		unit: mainUnit3.current.value
+								// 	},
+								// 	name: mainName3.current.value
+								// },
+								// {
+								// 	amount: {
+								// 		value: mainValue4.current.value,
+								// 		unit: mainUnit4.current.value
+								// 	},
+								// 	name: mainName4.current.value
+								// },
+								// {
+								// 	amount: {
+								// 		value: mainValue5.current.value,
+								// 		unit: mainUnit5.current.value
+								// 	},
+								// 	name: mainName5.current.value
+								// }
 							],
 							other: [
 								{
@@ -120,8 +175,9 @@ export default function EditLactoFerment(props) {
 		}
 	};
 
-	console.log(lactoFerment);
-	//console.log(lactoFerment);
+	// console.log(lactoFerment);
+	// console.log(mainIngredients);
+
 	// this seems to console log twice once as an empty array and undefiend and then as what i expect.
 	// when i add in the next line it bugs out entierly.
 	//console.log(`${lactoFerment[volume].val}`);
@@ -189,42 +245,187 @@ export default function EditLactoFerment(props) {
 				) : (
 					''
 				)}
+				{/* //////////Main ingredients///////// */}
 				{Object.keys(lactoFerment).length > 1 ? (
-					<label>
-						Main ingredient
-						<input
-							type="text"
-							ref={mainName}
-							defaultValue={lactoFerment.ingredients.main[0].name}
-						/>
-					</label>
+					<div>
+						<label>
+							Main ingredient
+							<input
+								type="text"
+								ref={mainName}
+								defaultValue={lactoFerment.ingredients.main[0].name}
+							/>
+						</label>
+						<label>
+							Main amount
+							<input
+								type="text"
+								ref={mainValue}
+								defaultValue={lactoFerment.ingredients.main[0].amount.value}
+							/>
+						</label>
+						<label>
+							Main unit
+							<input
+								type="text"
+								ref={mainUnit}
+								defaultValue={lactoFerment.ingredients.main[0].amount.unit}
+							/>
+						</label>
+					</div>
 				) : (
 					''
 				)}
-				{Object.keys(lactoFerment).length > 1 ? (
-					<label>
-						Main amount
-						<input
-							type="text"
-							ref={mainValue}
-							defaultValue={lactoFerment.ingredients.main[0].amount.value}
-						/>
-					</label>
+
+				{/* //2 */}
+
+				{/* {Object.keys(lactoFerment).length > 1 ? (
+					<div>
+						<label>
+							Main 2
+							<input
+								type="text"
+								ref={mainName2}
+								defaultValue={lactoFerment.ingredients.main[1].name || ''}
+							/>
+						</label>
+						<label>
+							Main 2 amount
+							<input
+								type="text"
+								ref={mainValue2}
+								defaultValue={
+									lactoFerment.ingredients.main[1].amount.value || ''
+								}
+							/>
+						</label>
+						<label>
+							Main 2 unit
+							<input
+								type="text"
+								ref={mainUnit2}
+								defaultValue={
+									lactoFerment.ingredients.main[1].amount.unit || ''
+								}
+							/>
+						</label>
+					</div>
+				) : (
+					''
+				)} */}
+
+				{/* //3 */}
+
+				{/* {Object.keys(lactoFerment).length > 1 ? (
+					<div>
+						<label>
+							Main 3
+							<input
+								type="text"
+								ref={mainName3}
+								defaultValue={lactoFerment.ingredients.main[2].name || ''}
+							/>
+						</label>
+						<label>
+							Main 3 amount
+							<input
+								type="text"
+								ref={mainValue3}
+								defaultValue={
+									lactoFerment.ingredients.main[2].amount.value || ''
+								}
+							/>
+						</label>
+						<label>
+							Main 3 unit
+							<input
+								type="text"
+								ref={mainUnit3}
+								defaultValue={
+									lactoFerment.ingredients.main[2].amount.unit || ''
+								}
+							/>
+						</label>
+					</div>
+				) : (
+					''
+				)} */}
+
+				{/* //4// */}
+
+				{/* {Object.keys(lactoFerment).length > 1 ? (
+					<div>
+						<label>
+							Main
+							<input
+								type="text"
+								ref={mainName4}
+								defaultValue={lactoFerment.ingredients.main[3].name || ''}
+							/>
+						</label>
+						<label>
+							Main 4 amount
+							<input
+								type="text"
+								ref={mainValue4}
+								defaultValue={
+									lactoFerment.ingredients.main[3].amount.value || ''
+								}
+							/>
+						</label>
+						<label>
+							Main 4 unit
+							<input
+								type="text"
+								ref={mainUnit4}
+								defaultValue={
+									lactoFerment.ingredients.main[3].amount.unit || ''
+								}
+							/>
+						</label>
+					</div>
+				) : (
+					''
+				)} */}
+
+				{/* ///5// */}
+
+				{/* {Object.keys(lactoFerment).length > 1 ? (
+					<div>
+						<label>
+							Main 5
+							<input
+								type="text"
+								ref={mainName}
+								defaultValue={lactoFerment.ingredients.main[4].name || ''}
+							/>
+						</label>
+						<label>
+							Main 5 amount
+							<input
+								type="text"
+								ref={mainValue}
+								defaultValue={
+									lactoFerment.ingredients.main[4].amount.value || ''
+								}
+							/>
+						</label>
+						<label>
+							Main 5 unit
+							<input
+								type="text"
+								ref={mainUnit}
+								defaultValue={
+									lactoFerment.ingredients.main[4].amount.unit || ''
+								}
+							/>
+						</label>
+					</div>
 				) : (
 					''
 				)}
-				{Object.keys(lactoFerment).length > 1 ? (
-					<label>
-						Main unit
-						<input
-							type="text"
-							ref={mainUnit}
-							defaultValue={lactoFerment.ingredients.main[0].amount.unit}
-						/>
-					</label>
-				) : (
-					''
-				)}
+				 */}
+				{/* ////////////////////// */}
 				{Object.keys(lactoFerment).length > 1 ? (
 					<label>
 						salt amount
@@ -250,47 +451,41 @@ export default function EditLactoFerment(props) {
 					''
 				)}
 				{Object.keys(lactoFerment).length > 1 ? (
-					<label>
-						Other name
-						<input
-							type="text"
-							ref={otherName}
-							defaultValue={lactoFerment.ingredients.other[0].name}
-						/>
-					</label>
-				) : (
-					''
-				)}
-				{Object.keys(lactoFerment).length > 1 ? (
-					<label>
-						other amount
-						<input
-							type="number"
-							ref={otherValue}
-							defaultValue={lactoFerment.ingredients.other[0].amount.value}
-						/>
-					</label>
-				) : (
-					''
-				)}
-				{Object.keys(lactoFerment).length > 1 ? (
-					<label>
-						other unit
-						<input
-							type="text"
-							ref={otherUnit}
-							defaultValue={lactoFerment.ingredients.other[0].amount.unit}
-						/>
-					</label>
+					<div>
+						<label>
+							Other name
+							<input
+								type="text"
+								ref={otherName}
+								defaultValue={lactoFerment.ingredients.other[0].name}
+							/>
+						</label>
+						<label>
+							other amount
+							<input
+								type="number"
+								ref={otherValue}
+								defaultValue={lactoFerment.ingredients.other[0].amount.value}
+							/>
+						</label>
+						<label>
+							other unit
+							<input
+								type="text"
+								ref={otherUnit}
+								defaultValue={lactoFerment.ingredients.other[0].amount.unit}
+							/>
+						</label>
+					</div>
 				) : (
 					''
 				)}
 				<label>
-					update Fermentaion recipe
+					update recipe
 					<input type="submit" />
 				</label>
 			</form>
-			<button onClick={handleDelete}> Delete this recipe </button>
+			<button onClick={handleDelete}> Delete recipe </button>
 		</div>
 	);
 }
