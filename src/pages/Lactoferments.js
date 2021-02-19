@@ -18,7 +18,7 @@ export default function Lactoferments(props) {
 
 	return (
 		<div className="LactoFerments">
-			<h1> Lacto Fermentaion Recipes</h1>
+			<h1> Lacto Ferments</h1>
 			<ul>
 				{ferments.map(item => {
 					//how do i make it to ths show page

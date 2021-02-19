@@ -61,7 +61,7 @@ export default function BeerRecipe(props) {
 		}
 	};
 	return (
-		<div>
+		<div className="beer-recipe">
 			<div className="recipe-head">
 				{beer.name ? <h1>{beer.name}</h1> : ''}
 				{beer.style ? <h2>{beer.style}</h2> : ''}

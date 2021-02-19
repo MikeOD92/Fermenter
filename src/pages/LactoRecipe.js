@@ -21,7 +21,7 @@ export default function LactoRecipe(props) {
 	}, []);
 
 	return (
-		<div>
+		<div className="lacto-recipe">
 			<div className="recipe-head">
 				<h1> {currentFerment.name ? currentFerment.name : ''}</h1>
 				<h3> {currentFerment.description ? currentFerment.description : ''}</h3>

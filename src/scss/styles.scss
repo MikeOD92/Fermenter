@@ -1,16 +1,71 @@
 @import "reset";
 @import "grid";
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Nothing+You+Could+Do&display=swap');
+
+/// font-family: 'Lato', sans-serif;
+//font-family: 'Nothing You Could Do', cursive;
 
 body {
   font-size: 16px;
-  //background: url('https://images.pexels.com/photos/1568757/pexels-photo-1568757.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
-  //background-size:cover ;
+  background: url('https://images.pexels.com/photos/1568757/pexels-photo-1568757.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
+  background-size:cover;
+  font-family: 'Lato', sans-serif;
+ 
 }
-
 .NavBar {
   display: flex;
   justify-content: space-around;
   width: 100%;
-  background-color: rgba(255,255,225,0.4);
+  background-color: rgba(235, 255, 225, 0.7);
+  padding: 5px;
+}
+#app{
+  h1, h2{
+    font-family: 'Nothing You Could Do', cursive;
+    text-decoration: underline black;
+  }
+  a{
+    color:rgb(199, 18, 18);
+  }
+  .LactoFerments, .Beer-Recipes, .AppPage {
+          //clip-path: polygon(0 18%, 6% 0, 38% 0, 44% 18%, 100% 18%, 100% 100%, 0 100%);
+          //clip-path: polygon(0 18%, 6% 0, 59% 0, 65% 18%, 100% 18%, 100% 100%, 0 100%);
+          background-color: rgba(186, 245, 213, 0.8);
+          margin: 20px 5vw;
+          padding: 3%;
+          min-height: 50vh;
+          //box-shadow: black 2px 2px 6px;
+          border-bottom:solid 6px rgba(0,0,0,0.6); 
+          border-right:solid 3px rgba(0,0,0,0.6); 
+          clip-path: polygon(0 18%, 6% 0, 38% 0, 44% 18%, 100% 18%, 100% 100%, 0 100%);
+          h1{
+            font-size: 2.6rem;
+          }
+  }
+
+  .LactoFerments, .Beer-Recipes {
+      ul{
+          font-size: 1.3rem;
+          margin: 10px 0px 35px 35px ;
+          line-height: 30px;
+          list-style-type: disc;
+  }}
+  .newLactofermentForm, .newbeerForm{
+    padding: 3%;
+    text-align: right;
+    margin: 20px 5vw;
+    background-color: white;
+    form{
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: auto;
+    }
+  }
+  .lacto-recipe, .beer-recipe{
+    padding: 3%;
+    text-align: left;
+    margin: 20px 5vw;
+    background-color: white;
+  }
 }
 
