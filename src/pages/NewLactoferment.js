@@ -77,6 +77,7 @@ export default function NewLactoFerment(props) {
 	};
 	return (
 		<div className="newLactofermentForm">
+			<h1> New Fermentaion</h1>
 			<form onSubmit={handleSubmit}>
 				<label>
 					Recipe Name
@@ -134,10 +135,12 @@ export default function NewLactoFerment(props) {
 					other unit
 					<input type="text" ref={otherUnit} />
 				</label>
-				<label>
-					Create Fermentaion recipe
-					<input type="submit" />
-				</label>
+				<span className="button">
+					<label>
+						Create Fermentaion recipe
+						<input type="submit" />
+					</label>
+				</span>
 			</form>
 		</div>
 	);

@@ -126,7 +126,7 @@ export default function NewBeerForm(props) {
 	};
 	console.log(beer);
 	return (
-		<div className="newbeerForm">
+		<div className="beerEditForm">
 			<form onSubmit={handleSubmit}>
 				<label>
 					Brew Name
@@ -352,10 +352,12 @@ export default function NewBeerForm(props) {
 				) : (
 					''
 				)}
-				<label>
-					Create beer recipe
-					<input type="submit" />
-				</label>
+				<span className="button">
+					<label>
+						Update recipe:
+						<input type="submit" />
+					</label>
+				</span>
 			</form>
 			<button onClick={handleDelete}> Delete Beer Recipe </button>
 		</div>

@@ -177,7 +177,7 @@ export default function EditLactoFerment(props) {
 	//console.log(`${lactoFerment[volume].val}`);
 	//${lactoFerment.volume.unit}
 	return (
-		<div className="newLactofermentForm">
+		<div className="lactofermentEditForm">
 			<form onSubmit={handleSubmit}>
 				<label>
 					Recipe Name
@@ -241,32 +241,38 @@ export default function EditLactoFerment(props) {
 				)}
 				{/* //////////Main ingredients///////// */}
 				{Object.keys(lactoFerment).length > 1 ? (
-					<div>
-						<label>
-							Main ingredient
-							<input
-								type="text"
-								ref={mainName}
-								defaultValue={lactoFerment.ingredients.main[0].name}
-							/>
-						</label>
-						<label>
-							Main amount
-							<input
-								type="text"
-								ref={mainValue}
-								defaultValue={lactoFerment.ingredients.main[0].amount.value}
-							/>
-						</label>
-						<label>
-							Main unit
-							<input
-								type="text"
-								ref={mainUnit}
-								defaultValue={lactoFerment.ingredients.main[0].amount.unit}
-							/>
-						</label>
-					</div>
+					<label>
+						Main ingredient
+						<input
+							type="text"
+							ref={mainName}
+							defaultValue={lactoFerment.ingredients.main[0].name}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(lactoFerment).length > 1 ? (
+					<label>
+						Main amount
+						<input
+							type="text"
+							ref={mainValue}
+							defaultValue={lactoFerment.ingredients.main[0].amount.value}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(lactoFerment).length > 1 ? (
+					<label>
+						Main unit
+						<input
+							type="text"
+							ref={mainUnit}
+							defaultValue={lactoFerment.ingredients.main[0].amount.unit}
+						/>
+					</label>
 				) : (
 					''
 				)}
@@ -445,39 +451,47 @@ export default function EditLactoFerment(props) {
 					''
 				)}
 				{Object.keys(lactoFerment).length > 1 ? (
-					<div>
-						<label>
-							Other name
-							<input
-								type="text"
-								ref={otherName}
-								defaultValue={lactoFerment.ingredients.other[0].name}
-							/>
-						</label>
-						<label>
-							other amount
-							<input
-								type="number"
-								ref={otherValue}
-								defaultValue={lactoFerment.ingredients.other[0].amount.value}
-							/>
-						</label>
-						<label>
-							other unit
-							<input
-								type="text"
-								ref={otherUnit}
-								defaultValue={lactoFerment.ingredients.other[0].amount.unit}
-							/>
-						</label>
-					</div>
+					<label>
+						Other name
+						<input
+							type="text"
+							ref={otherName}
+							defaultValue={lactoFerment.ingredients.other[0].name}
+						/>
+					</label>
 				) : (
 					''
 				)}
-				<label>
-					update recipe
-					<input type="submit" />
-				</label>
+				{Object.keys(lactoFerment).length > 1 ? (
+					<label>
+						other amount
+						<input
+							type="number"
+							ref={otherValue}
+							defaultValue={lactoFerment.ingredients.other[0].amount.value}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				{Object.keys(lactoFerment).length > 1 ? (
+					<label>
+						other unit
+						<input
+							type="text"
+							ref={otherUnit}
+							defaultValue={lactoFerment.ingredients.other[0].amount.unit}
+						/>
+					</label>
+				) : (
+					''
+				)}
+				<span className="button">
+					<label>
+						update recipe:
+						<input type="submit" />
+					</label>
+				</span>
 			</form>
 			<button onClick={handleDelete}> Delete recipe </button>
 		</div>
