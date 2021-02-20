@@ -19,7 +19,18 @@ Fermenter currently has 3 models
 brew notes currently only work for the beers
 both beer and lactoferments can be created, updated, read and deleted, 
 
-The forms will need to be refactored so that the app can have dynamic lists, right now the user is only able to add one main ingreident, spice, malt or hop.
+### Forms
+
+The forms will need to be refactored so that the app can have dynamic lists, right now the user is only able to add one main ingreident, spice, malt or hop. Forms need to be completly reworked and made dynamic. 
+The user should be able to click a button adding a new form input for all ingredient keys that are arrays.
+
+### Update/edit
+
+this loads really slow, I need to figure out why
+
+
+
+ 
 
 
 
