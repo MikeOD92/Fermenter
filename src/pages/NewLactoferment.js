@@ -93,7 +93,7 @@ export default function NewLactoFerment(props) {
 							duration: 'weeks'
 						}
 					},
-					// added inputs for up to here
+					// HERE
 					ingredients: {
 						salt: {
 							amount: {
@@ -183,7 +183,39 @@ export default function NewLactoFerment(props) {
 							onBlur={handleBlur}
 							value={values.method.ferment.duration}
 						/>
+						{/* //////////////////HERE*/}
+						<label> ingredients :</label>
 
+						<label> salt</label>
+						<input
+							type="float"
+							name="ingredients.salt.amount.value"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							value={values.ingredients.salt.amount.value}
+						/>
+							<input
+							type="string"
+							name="ingredients.salt.amount.unit"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							value={values.ingredients.salt.amount.unit}
+						/>
+						<label> Main </label>
+						{/* array feild */}
+						{/* <FieldArray
+							name="ingredients.main"
+							render={arrayHelpers => (
+								<div>
+									{values.ingredients.main && values.ingredients.main.length > 0? (
+										values.ingredients.main.map((ingredient, index) => (
+											<div key={index}>
+												<Field name={`ingredients.main${index}`} />
+										))
+									)}
+								</div>
+							)}
+							/> */}
 						<button type="submit">Submit</button>
 					</form>
 				)}
