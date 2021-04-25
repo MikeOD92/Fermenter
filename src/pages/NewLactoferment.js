@@ -89,7 +89,7 @@ export default function NewLactoFerment(props) {
 					},
 					method: {
 						ferment: {
-							temp: "20 C",
+							temp: '20 C',
 							duration: 'weeks'
 						}
 					},
@@ -194,7 +194,7 @@ export default function NewLactoFerment(props) {
 							onBlur={handleBlur}
 							value={values.ingredients.salt.amount.value}
 						/>
-							<input
+						<input
 							type="string"
 							name="ingredients.salt.amount.unit"
 							onChange={handleChange}
@@ -203,19 +203,42 @@ export default function NewLactoFerment(props) {
 						/>
 						<label> Main </label>
 						{/* array feild */}
-						{/* <FieldArray
+						<FieldArray
 							name="ingredients.main"
 							render={arrayHelpers => (
 								<div>
-									{values.ingredients.main && values.ingredients.main.length > 0? (
+									{values.ingredients.main &&
+									values.ingredients.main.length > 0 ? (
 										values.ingredients.main.map((ingredient, index) => (
 											<div key={index}>
-												<Field name={`ingredients.main${index}`} />
+												<Field
+													name={`ingredients.main.${index}.amount.value`}
+												/>
+												<Field name={`ingredients.main.${index}.amount.unit`} />
+												<Field name={`ingredients.main${index}.name`} />
+												<button
+													type="button"
+													onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+												>
+													-
+												</button>
+												<button
+													type="button"
+													onClick={() => arrayHelpers.insert(index, '')} // insert an empty string at a position
+												>
+													+
+												</button>
+											</div>
 										))
+									) : (
+										<button type="button" onClick={() => arrayHelpers.push('')}>
+											{/* show this when user has removed all hops from the list */}
+											Add hops
+										</button>
 									)}
 								</div>
 							)}
-							/> */}
+						/>
 						<button type="submit">Submit</button>
 					</form>
 				)}
