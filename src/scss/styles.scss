@@ -58,6 +58,10 @@ body {
     background-color: rgba(255,255,255,0.9);
     box-shadow:2px 2px 4px black;
 
+    .field-container{
+      border: 2px solid black;
+    }
+    
     form{
       display: grid;
       grid-template-columns: 50% 50%;
@@ -73,6 +77,7 @@ body {
         grid-column-end: 3;
       }
     }
+ 
   }
 
   ////// Recipe pages
