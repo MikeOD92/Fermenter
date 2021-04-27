@@ -10,15 +10,16 @@ const beerSchema = new Schema({
       value: Number, 
       unit: String
     },
-    boil:{
-      value: Number,
-      unit: String, 
-    },
-    method:{
+
+    method:{  
       mash: {
         temp: Number, 
         duration: Number,
-      },  
+      },    
+      boil:{
+        value: Number,
+        unit: String, 
+      },
       ferment: {
         temp: Number, 
         time: String
@@ -28,21 +29,17 @@ const beerSchema = new Schema({
         malt: [
           {
             name: String,
-            amount: {
-              value: Number,
-              unit: String
-            }
+            value: Number,
+            unit: String
           }
         ],
         hops: [
           {
             name: String,
-            amount: {
-              value: Number,
-              unit: String
-             },
-             add: String,
-             attribute: String
+            value: Number,
+            unit: String,
+            add: String,
+            attribute: String
            },
         ],
         yeast: String
