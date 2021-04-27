@@ -16,9 +16,8 @@ const beerSchema = new Schema({
         temp: Number, 
         duration: Number,
       },    
-      boil:{
-        value: Number,
-        unit: String, 
+      wort:{
+        time: String, 
       },
       ferment: {
         temp: Number, 
@@ -38,9 +37,9 @@ const beerSchema = new Schema({
             name: String,
             value: Number,
             unit: String,
-            add: String,
+            sched: String,
             attribute: String
-           },
+          },
         ],
         yeast: String
       },

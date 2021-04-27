@@ -33,7 +33,7 @@ export default function LactoRecipe(props) {
 						? currentFerment.ingredients.main.map((item, index) => {
 								return (
 									<li key={`${item.name}${index}`}>
-										{item.name} :: {item.amount.value} {item.amount.unit}
+										{item.name} :: {item.value} {item.unit}
 									</li>
 								);
 						  })
@@ -51,8 +51,8 @@ export default function LactoRecipe(props) {
 					{/* ////Salt */}
 					{currentFerment.name ? (
 						<li key={`Salt${currentFerment._id}`}>
-							Salt :: {currentFerment.ingredients.salt.amount.value}{' '}
-							{currentFerment.ingredients.salt.amount.unit}
+							Salt :: {currentFerment.ingredients.salt.value}{' '}
+							{currentFerment.ingredients.salt.unit}
 						</li>
 					) : (
 						''
@@ -65,7 +65,7 @@ export default function LactoRecipe(props) {
 								{currentFerment.ingredients.other.map(item => {
 									return (
 										<li key={`${item._id}${item.name}`}>
-											{item.name} :: {item.amount.value} {item.amount.unit}
+											{item.name} :: {item.value} {item.unit}
 										</li>
 									);
 								})}
@@ -101,8 +101,8 @@ export default function LactoRecipe(props) {
 					<div>
 						<p>
 							{' '}
-							Ferment at {currentFerment.method.ferment.temp}C for{' '}
-							{currentFerment.method.ferment.duration}
+							Ferment at {currentFerment.ferment.temp}C for{' '}
+							{currentFerment.ferment.duration}
 						</p>
 					</div>
 				) : (
