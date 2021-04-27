@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Formik, Field, FieldArray } from 'formik';
 
 export default function NewLactoFerment(props) {
@@ -38,8 +38,20 @@ export default function NewLactoFerment(props) {
 						]
 					}
 				}}
-				onSubmit={(values, {}) => {
-					alert(JSON.stringify(values));
+				onSubmit={async values => {
+					try {
+						const response = await fetch('/api/lactoferments', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify(values)
+						});
+					} catch (error) {
+						console.error(error);
+					} finally {
+						window.location.assign('/');
+					}
 				}}
 			>
 				{({
