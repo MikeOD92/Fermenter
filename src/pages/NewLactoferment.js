@@ -39,20 +39,20 @@ export default function NewLactoFerment(props) {
 					}
 				}}
 				onSubmit={async values => {
-					alert(values.json());
-					// try {
-					// 	const response = await fetch('/api/lactoferments', {
-					// 		method: 'POST',
-					// 		headers: {
-					// 			'Content-Type': 'application/json'
-					// 		},
-					// 		body: JSON.stringify(values)
-					// 	});
-					// } catch (error) {
-					// 	console.error(error);
-					// } finally {
-					// 	window.location.assign('/');
-					// }
+					// alert(values.json());
+					try {
+						const response = await fetch('/api/lactoferments', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify(values)
+						});
+					} catch (error) {
+						console.error(error);
+					} finally {
+						window.location.assign('/');
+					}
 				}}
 			>
 				{({
