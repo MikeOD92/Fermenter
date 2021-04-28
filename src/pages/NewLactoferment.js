@@ -216,10 +216,9 @@ export default function NewLactoFerment(props) {
 								</div>
 							)}
 						/>
-
-						<button type="submit">Submit</button>
 					</form>
 				)}
+				<button type="submit">Submit</button>
 			</Formik>
 		</div>
 	);
