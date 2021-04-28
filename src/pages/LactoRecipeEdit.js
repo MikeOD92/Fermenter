@@ -35,7 +35,7 @@ export default function EditLactoFerment(props) {
 	};
 	return (
 		<div className="lactofermentEditForm">
-			<Formik initialValues={lactoFerment.entries()}>
+			<Formik initialValues={lactoFerment}>
 				<form onSubmit={greet}>
 					<label> Name:</label>
 					{lactoFerment.name ? (
