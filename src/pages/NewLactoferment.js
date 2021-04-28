@@ -39,19 +39,20 @@ export default function NewLactoFerment(props) {
 					}
 				}}
 				onSubmit={async values => {
-					try {
-						const response = await fetch('/api/lactoferments', {
-							method: 'POST',
-							headers: {
-								'Content-Type': 'application/json'
-							},
-							body: JSON.stringify(values)
-						});
-					} catch (error) {
-						console.error(error);
-					} finally {
-						window.location.assign('/');
-					}
+					alert(values.json());
+					// try {
+					// 	const response = await fetch('/api/lactoferments', {
+					// 		method: 'POST',
+					// 		headers: {
+					// 			'Content-Type': 'application/json'
+					// 		},
+					// 		body: JSON.stringify(values)
+					// 	});
+					// } catch (error) {
+					// 	console.error(error);
+					// } finally {
+					// 	window.location.assign('/');
+					// }
 				}}
 			>
 				{({
@@ -95,8 +96,8 @@ export default function NewLactoFerment(props) {
 							value={values.volume.unit}
 						/>
 
-						<label> Ferment </label>
-						<label> temp </label>
+						<label>Ferment</label>
+						<label>temp</label>
 						<input
 							type="string"
 							name="ferment.temp"
@@ -104,7 +105,7 @@ export default function NewLactoFerment(props) {
 							onBlur={handleBlur}
 							value={values.ferment.temp}
 						/>
-						<label> duration </label>
+						<label>duration</label>
 						<input
 							type="string"
 							name="ferment.duration"
@@ -113,9 +114,9 @@ export default function NewLactoFerment(props) {
 							value={values.ferment.duration}
 						/>
 						{/* //////////////////HERE*/}
-						<label> ingredients :</label>
+						<label> ingredients:</label>
 						{/* array feild */}
-						<label> Main: </label>
+						<label> Main:</label>
 						<FieldArray
 							name="ingredients.main"
 							render={arrayHelpers => (
@@ -216,9 +217,9 @@ export default function NewLactoFerment(props) {
 								</div>
 							)}
 						/>
+						<button type="submit">Submit</button>
 					</form>
 				)}
-				<button type="submit">Submit</button>
 			</Formik>
 		</div>
 	);

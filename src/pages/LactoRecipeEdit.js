@@ -29,13 +29,14 @@ export default function EditLactoFerment(props) {
 			}
 		})();
 	}, []);
-	const greet = e => {
-		e.preventDefault();
-		console.log(values);
-	};
+
+	// const greet = e => {
+	// 	e.preventDefault();
+	// 	console.log(values);
+	// };
 	return (
 		<div className="lactofermentEditForm">
-			<Formik initialValues={lactoFerment}>
+			{/* <Formik initialValues={lactoFerment}>
 				<form onSubmit={greet}>
 					<label> Name:</label>
 					{lactoFerment.name ? (
@@ -51,7 +52,7 @@ export default function EditLactoFerment(props) {
 					)}
 					<button type="submit">Submit</button>
 				</form>
-			</Formik>
+			</Formik> */}
 		</div>
 	);
 }
