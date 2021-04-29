@@ -101,7 +101,7 @@ export default function LactoRecipe(props) {
 					<div>
 						<p>
 							{' '}
-							Ferment at {currentFerment.ferment.temp}C for{' '}
+							Ferment at {currentFerment.ferment.temp}degrees for{' '}
 							{currentFerment.ferment.duration}
 						</p>
 					</div>
@@ -109,7 +109,10 @@ export default function LactoRecipe(props) {
 					''
 				)}
 			</div>
-			<Link to={`/lactoferments/${props.match.params.id}/edit`}>
+			<Link
+				to={`/lactoferments/${props.match.params.id}/edit`}
+				ferment={currentFerment}
+			>
 				{' '}
 				Update Recipe{' '}
 			</Link>
