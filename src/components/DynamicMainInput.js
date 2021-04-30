@@ -2,15 +2,46 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 
 export default function DynamicMainInput(props) {
-	const [ferment, setFerment] = useState(props.lactoFerment);
+	const add = () => {
+		// e.preventDefault();
+		props.lactoFerment.ingredients.main.push({
+			name: '',
+			value: 0.0,
+			unit: 'unit'
+		});
+		props.set(props.lactoFerment);
+		apiCall();
+	};
 
-	useEffect(() => {
-		console.log('mounted');
-	}, [props]);
+	const remove = e => {
+		props.lactoFerment.ingredients.main.splice(e.target.id, 1);
+		props.set(props.lactoFerment);
+		apiCall();
+	};
 
-	return ferment.ingredients.main.map((ingredient, index) => {
+	const apiCall = () => {
+		(async () => {
+			try {
+				const response = await fetch(`/api/lactoferments/${props.match}`, {
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(props.lactoFerment)
+				});
+			} catch (error) {
+				console.error(error);
+			} finally {
+				props.setUpdater(props.updater + 1);
+			}
+		})();
+	};
+
+	// maybe a problem with this not actually updating correctly
+
+	return props.lactoFerment.ingredients.main.map((ingredient, index) => {
 		return (
-			<div>
+			<div index={index}>
 				<input
 					type="string"
 					name={`ingredients.main[${index}].name`}
@@ -32,20 +63,10 @@ export default function DynamicMainInput(props) {
 					key={`${props.lactoFerment.ingredients.main[index].unit}${index}`}
 				/>
 
-				{/* <button
-					onClick={e => {
-						e.preventDefault();
-						props.lactoFerment.ingredients.main.push({
-							name: '',
-							value: 0.0,
-							unit: 'unit'
-						});
-						setFerment(ferment);
-						console.log(props.lactoFerment.ingredients.main);
-					}}
-				>
-					+
-				</button> */}
+				<button onClick={add}>+</button>
+				<button onClick={remove} id={index}>
+					-
+				</button>
 			</div>
 		);
 	});

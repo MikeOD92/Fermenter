@@ -111,7 +111,7 @@ export default function LactoRecipe(props) {
 			</div>
 			<Link
 				to={`/lactoferments/${props.match.params.id}/edit`}
-				ferment={currentFerment}
+				state={currentFerment}
 			>
 				{' '}
 				Update Recipe{' '}
