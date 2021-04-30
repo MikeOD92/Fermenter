@@ -31,20 +31,84 @@ export default function EditLactoFerment(props) {
 	}, [updater]);
 
 	// useEffect(() => {}, [lactoFerment]);
-
-	const submit = e => {
+	const submit = async e => {
 		e.preventDefault();
-		console.log(JSON.stringify(lactoFerment));
-		// you can acess the names with the . like this:
-		// console.log(e.target['volume.unit']);
 
-		// for (let i = 0; i < e.target.length; i++) {
-		// 	if (e.target[i].name) {
-		// 		console.log(e.target);
-		// 	} else {
-		// 	}
-		// }
+		let pasrsedData = {};
+		let datagather = [];
+
+		for (let i = 0; i < e.target.length; i++) {
+			if (e.target[i].name) {
+				datagather.push(e.target[i].name);
+				// console.log(e.target[i].value);
+				datagather.push(e.target[i].value);
+			}
+		}
+		for (let i = 0; i < datagather.length; i++) {
+			if (i % 2 === 0) {
+				pasrsedData[datagather[i]] = datagather[i + 1];
+			}
+		}
+		// return JSON.stringify(pasrsedData);
+		// console.log(JSON.stringify(pasrsedData));
+		apiCall(pasrsedData);
 	};
+
+	const apiCall = async pasrsedData => {
+		(async () => {
+			try {
+				const response = await fetch(
+					`/api/lactoferments/${props.match.params.id}`,
+					{
+						method: 'PUT',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(pasrsedData)
+					}
+				);
+			} catch (error) {
+				console.error(error);
+			} finally {
+				console.log(JSON.stringify(pasrsedData));
+			}
+		})();
+	};
+
+	/////////////////
+
+	/// my parsed data gives me proper json and should work the api call on the submit does not seem to be working
+
+	//////////////////
+
+	// const parseData = e => {
+	// 	e.preventDefault();
+
+	// 	let pasrsedData = {};
+	// 	let datagather = [];
+
+	// 	for (let i = 0; i < e.target.length; i++) {
+	// 		if (e.target[i].name) {
+	// 			datagather.push(e.target[i].name);
+	// 			datagather.push(e.target[i].value);
+	// 		}
+	// 	}
+	// 	for (let i = 0; i < datagather.length; i++) {
+	// 		if (i % 2 === 0) {
+	// 			pasrsedData[datagather[i]] = datagather[i + 1];
+	// 		}
+	// 	}
+	// 	return JSON.stringify(pasrsedData);
+	// };
+	// you can acess the names with the . like this:
+	// console.log(e.target['volume.unit']);
+
+	// for (let i = 0; i < e.target.length; i++) {
+	// 	if (e.target[i].name) {
+	// 		console.log(e.target);
+	// 	} else {
+	// 	}
+	// }
 	return (
 		<div className="lactofermentEditForm">
 			<form onSubmit={submit}>
