@@ -44,21 +44,21 @@ export default function DynamicMainInput(props) {
 			<div index={index}>
 				<input
 					type="string"
-					name={`ingredients.main[${index}].name`}
+					name={`main[${index}].name`}
 					defaultValue={props.lactoFerment.ingredients.main[index].name}
 					key={`${props.lactoFerment.ingredients.main[index].name}${index}`}
 				/>
 
 				<input
 					type="string"
-					name={`ingredients.main[${index}].value`}
+					name={`main[${index}].value`}
 					defaultValue={props.lactoFerment.ingredients.main[index].value}
 					key={`${props.lactoFerment.ingredients.main[index].value}${index}`}
 				/>
 
 				<input
 					type="string"
-					name={`ingredients.main[${index}].unit`}
+					name={`main[${index}].unit`}
 					defaultValue={props.lactoFerment.ingredients.main[index].unit}
 					key={`${props.lactoFerment.ingredients.main[index].unit}${index}`}
 				/>

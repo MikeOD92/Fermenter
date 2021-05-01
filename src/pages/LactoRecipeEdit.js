@@ -1,14 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import {
-	Formik,
-	Field,
-	FieldArray,
-	values,
-	handleSubmit,
-	handleChange,
-	handleBlur
-} from 'formik';
 
 import DynamicMainInput from '../components/DynamicMainInput';
 
@@ -31,84 +21,94 @@ export default function EditLactoFerment(props) {
 	}, [updater]);
 
 	// useEffect(() => {}, [lactoFerment]);
-	const submit = async e => {
+	const submit = e => {
 		e.preventDefault();
 
-		let pasrsedData = {};
-		let datagather = [];
+		///////////////////////
+		const data = new FormData(e.target);
 
-		for (let i = 0; i < e.target.length; i++) {
-			if (e.target[i].name) {
-				datagather.push(e.target[i].name);
-				// console.log(e.target[i].value);
-				datagather.push(e.target[i].value);
+		const value = Object.fromEntries(data.entries());
+		let main = [];
+		let volum = [];
+		let ferm = [];
+		let mainIngInput = [];
+
+		// goes throguh the formdata obj and pushes every key with main in the name to an array
+		// then deletes those keys from the value obj
+		Object.keys(value).map(key => {
+			if (key.includes('main')) {
+				main.push(value[key]);
+				delete value[key];
 			}
+		});
+
+		/// loop over the array by getting on the names that include main and push every 3 inputs as an object to the
+		/// mainIngInput array
+		for (let i = 0; i < main.length; i += 3) {
+			mainIngInput.push({
+				name: main[i],
+				value: main[i + 1],
+				unit: main[i + 2]
+			});
 		}
-		for (let i = 0; i < datagather.length; i++) {
-			if (i % 2 === 0) {
-				pasrsedData[datagather[i]] = datagather[i + 1];
+		/// put this new aray of objects as key main into the form value obj
+		value['ingredients'] = {
+			main: mainIngInput,
+			other: 'others'
+		};
+		// repete process for volume ferment and other
+		Object.keys(value).map(key => {
+			if (key.includes('volume')) {
+				volum.push(value[key]);
+				delete value[key];
 			}
-		}
-		// return JSON.stringify(pasrsedData);
-		// console.log(JSON.stringify(pasrsedData));
-		apiCall(pasrsedData);
+		});
+
+		value['volume'] = {
+			value: volum[0],
+			unit: volum[1]
+		};
+
+		Object.keys(value).map(key => {
+			if (key.includes('ferment')) {
+				ferm.push(value[key]);
+				delete value[key];
+			}
+		});
+
+		value['ferment'] = {
+			temp: ferm[0],
+			duration: ferm[1]
+		};
+
+		console.log(value);
+
+		apiCall(value);
 	};
 
-	const apiCall = async pasrsedData => {
-		(async () => {
-			try {
-				const response = await fetch(
-					`/api/lactoferments/${props.match.params.id}`,
-					{
-						method: 'PUT',
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify(pasrsedData)
-					}
-				);
-			} catch (error) {
-				console.error(error);
-			} finally {
-				console.log(JSON.stringify(pasrsedData));
-			}
-		})();
+	const apiCall = async value => {
+		try {
+			const response = await fetch(
+				`/api/lactoferments/${props.match.params.id}`,
+				{
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(value)
+				}
+			);
+			const data = await response.json();
+			setlactoFerment(data);
+			console.log('out res was:');
+			console.log(data);
+		} catch (error) {
+			console.error(error);
+		} finally {
+			// window.location.assign('/lactoferments');
+		}
 	};
 
-	/////////////////
-
-	/// my parsed data gives me proper json and should work the api call on the submit does not seem to be working
-
-	//////////////////
-
-	// const parseData = e => {
-	// 	e.preventDefault();
-
-	// 	let pasrsedData = {};
-	// 	let datagather = [];
-
-	// 	for (let i = 0; i < e.target.length; i++) {
-	// 		if (e.target[i].name) {
-	// 			datagather.push(e.target[i].name);
-	// 			datagather.push(e.target[i].value);
-	// 		}
-	// 	}
-	// 	for (let i = 0; i < datagather.length; i++) {
-	// 		if (i % 2 === 0) {
-	// 			pasrsedData[datagather[i]] = datagather[i + 1];
-	// 		}
-	// 	}
-	// 	return JSON.stringify(pasrsedData);
-	// };
-	// you can acess the names with the . like this:
-	// console.log(e.target['volume.unit']);
-
-	// for (let i = 0; i < e.target.length; i++) {
-	// 	if (e.target[i].name) {
-	// 		console.log(e.target);
-	// 	} else {
-	// 	}
-	// }
 	return (
 		<div className="lactofermentEditForm">
 			<form onSubmit={submit}>
@@ -179,27 +179,26 @@ export default function EditLactoFerment(props) {
 							updater={updater}
 							setUpdater={setUpdater}
 						/>
-						{/* <button
-							onClick={e => {
-								e.preventDefault();
-								lactoFerment.ingredients.main.push({
-									name: 'name',
-									value: 0,
-									unit: 'unit'
-								});
-								setlactoFerment(lactoFerment);
-								console.log(lactoFerment.ingredients.main);
-							}}
-						>
-							+
-						</button> */}
 					</div>
 				) : (
 					''
 				)}
-				{/* {lactoFerment.ingredients.salt? (
-
+				{/* {lactoFerment.ingredients ? (
+					<div>
+						{' '}
+						<label> Spices and Aromatics: </label>
+						<DynamicOtherInput
+							lactoFerment={lactoFerment}
+							set={setlactoFerment}
+							match={props.match.params.id}
+							updater={updater}
+							setUpdater={setUpdater}
+						/>
+					</div>
+				) : (
+					''
 				)} */}
+
 				<button type={'submit'}>submit</button>
 			</form>
 		</div>
