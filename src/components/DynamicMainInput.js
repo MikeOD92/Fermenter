@@ -2,8 +2,8 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 
 export default function DynamicMainInput(props) {
-	const add = () => {
-		// e.preventDefault();
+	const add = e => {
+		e.preventDefault();
 		props.lactoFerment.ingredients.main.push({
 			name: '',
 			value: 0.0,
@@ -37,37 +37,41 @@ export default function DynamicMainInput(props) {
 		})();
 	};
 
-	// maybe a problem with this not actually updating correctly
+	return props.lactoFerment.ingredients.main.length > 0 ? (
+		props.lactoFerment.ingredients.main.map((ingredient, index) => {
+			return (
+				<div index={index}>
+					<input
+						type="string"
+						name={`main[${index}].name`}
+						defaultValue={props.lactoFerment.ingredients.main[index].name}
+						key={`${props.lactoFerment.ingredients.main[index].name}${index}`}
+					/>
 
-	return props.lactoFerment.ingredients.main.map((ingredient, index) => {
-		return (
-			<div index={index}>
-				<input
-					type="string"
-					name={`main[${index}].name`}
-					defaultValue={props.lactoFerment.ingredients.main[index].name}
-					key={`${props.lactoFerment.ingredients.main[index].name}${index}`}
-				/>
+					<input
+						type="string"
+						name={`main[${index}].value`}
+						defaultValue={props.lactoFerment.ingredients.main[index].value}
+						key={`${props.lactoFerment.ingredients.main[index].value}${index}`}
+					/>
 
-				<input
-					type="string"
-					name={`main[${index}].value`}
-					defaultValue={props.lactoFerment.ingredients.main[index].value}
-					key={`${props.lactoFerment.ingredients.main[index].value}${index}`}
-				/>
+					<input
+						type="string"
+						name={`main[${index}].unit`}
+						defaultValue={props.lactoFerment.ingredients.main[index].unit}
+						key={`${props.lactoFerment.ingredients.main[index].unit}${index}`}
+					/>
 
-				<input
-					type="string"
-					name={`main[${index}].unit`}
-					defaultValue={props.lactoFerment.ingredients.main[index].unit}
-					key={`${props.lactoFerment.ingredients.main[index].unit}${index}`}
-				/>
-
-				<button onClick={add}>+</button>
-				<button onClick={remove} id={index}>
-					-
-				</button>
-			</div>
-		);
-	});
+					<button onClick={add}>+</button>
+					<button onClick={remove} id={index}>
+						-
+					</button>
+				</div>
+			);
+		})
+	) : (
+		<div>
+			<button onClick={add}>+ ingredient</button>
+		</div>
+	);
 }

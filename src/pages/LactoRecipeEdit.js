@@ -51,12 +51,20 @@ export default function EditLactoFerment(props) {
 				unit: main[i + 2]
 			});
 		}
+		// repeate to get values from other array
 		/// put this new aray of objects as key main into the form value obj
 		value['ingredients'] = {
 			main: mainIngInput,
-			other: 'others'
+			other: [],
+			salt: {
+				value: 3,
+				unit: 'tbsp'
+			}
 		};
-		// repete process for volume ferment and other
+		/// so this works and submits correctly because it has the correct inputs. in the right structure, we need to
+		// add in the real values for salt and the other ing arry.
+
+		// repete process for volume and ferment ferment
 		Object.keys(value).map(key => {
 			if (key.includes('volume')) {
 				volum.push(value[key]);
@@ -105,7 +113,7 @@ export default function EditLactoFerment(props) {
 		} catch (error) {
 			console.error(error);
 		} finally {
-			// window.location.assign('/lactoferments');
+			window.location.assign(`/lactoferments`); // /${props.match.params.id}
 		}
 	};
 
