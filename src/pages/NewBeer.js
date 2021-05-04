@@ -1,101 +1,288 @@
 import React, { useState, useRef } from 'react';
+import { Formik, Field, FieldArray } from 'formik';
 
 export default function NewBeerForm(props) {
-	const [beers, setBeers] = useState([]);
-
-	const volumeVal = useRef(null);
-	const volumeUnit = useRef(null);
-	const boilValue = useRef(null);
-	const boilUnit = useRef(null);
-	const mashTemp = useRef(null);
-	const mashDuration = useRef(null);
-	const fermentTemp = useRef(null);
-	const fermentDuration = useRef(null);
-	const maltValue = useRef(null);
-	const maltunit = useRef(null);
-	const maltName = useRef(null);
-	const hopValue = useRef(null);
-	const hopUnit = useRef(null);
-	const hopName = useRef(null);
-	const hopAdd = useRef(null);
-	const hopAttr = useRef(null);
-	const yeast = useRef(null);
-	const name = useRef(null);
-	const style = useRef(null);
-	const description = useRef(null);
-	const abv = useRef(null);
-	const ibu = useRef(null);
-
-	const handleSubmit = async e => {
-		e.preventDefault();
-
-		try {
-			const response = await fetch('/api/beers', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					name: name.current.value,
-					style: style.current.value,
-					description: description.current.value,
-					abv: abv.current.value,
-					ibu: ibu.current.value,
+	return (
+		<div className="newbeerForm">
+			<h1> New Beer Recipe</h1>
+			<Formik
+				initialValues={{
+					name: '',
+					style: '',
+					description: '',
+					abv: 0,
+					ibu: 0,
 					volume: {
-						value: volumeVal.current.value,
-						unit: volumeUnit.current.value
-					},
-					boil: {
-						value: boilValue.current.value,
-						unit: boilUnit.current.value
+						value: 0.0,
+						unit: 'unit'
 					},
 					method: {
 						mash: {
-							temp: mashTemp.current.value,
-							duration: mashDuration.current.value
+							temp: 0,
+							duration: ''
 						},
+						wort: '',
 						ferment: {
-							temp: fermentTemp.current.value,
-							time: fermentDuration.current.value
+							temp: 0,
+							time: ''
 						}
 					},
 					ingredients: {
 						malt: [
 							{
-								amount: {
-									value: maltValue.current.value,
-									unit: maltunit.current.value
-								},
-								name: maltName.current.value
+								name: '',
+								value: 0,
+								unit: ''
 							}
 						],
 						hops: [
 							{
-								amount: {
-									value: hopValue.current.value,
-									unit: hopUnit.current.value
-								},
-								name: hopName.current.value,
-								add: hopAdd.current.value,
-								attribute: hopAttr.current.value
+								name: '',
+								value: 0,
+								unit: '',
+								sched: ''
 							}
 						],
-						yeast: yeast.current.value
+						yeast: ''
 					}
-				})
-			});
-			const data = await response.json();
-			setBeers([data]);
-		} catch (error) {
-			console.error(error);
-		} finally {
-			window.location.assign('/');
-		}
-	};
-	return (
-		<div className="newbeerForm">
-			<h1> New Beer Recipe</h1>
-			<form onSubmit={handleSubmit}>
+				}}
+				onSubmit={async values => {
+					// alert(values.json());
+					try {
+						const response = await fetch('/api/beers', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify(values)
+						});
+					} catch (error) {
+						console.error(error);
+					} finally {
+						window.location.assign('/');
+					}
+				}}
+			>
+				{({
+					values,
+					errors,
+					touched,
+					handleChange,
+					handleBlur,
+					handleSubmit
+				}) => (
+					<form onSubmit={handleSubmit}>
+						<label> Name: </label>
+						<input
+							type="string"
+							name="name"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							value={values.name}
+						/>
+						<label> Style:</label>
+						<input
+							type="string"
+							name="style"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							value={values.style}
+						/>
+						<label> Description:</label>
+						<input
+							type="string"
+							name="description"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							value={values.description}
+						/>
+						{/* beer specs */}
+						<label> ABV:</label>
+						<input
+							type="float"
+							name="abv"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							value={values.abv}
+						/>
+						<label> IBU:</label>
+						<input
+							type="float"
+							name="ibu"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							value={values.ibu}
+						/>
+
+						{/* volume */}
+
+						<label> Volume:</label>
+						<input
+							type="float"
+							name="volume.value"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							value={values.volume.value}
+						/>
+						<input
+							type="string"
+							name="volume.unit"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							value={values.volume.unit}
+						/>
+						{/* method */}
+
+						<label> Method: </label>
+						<label> Mash:</label>
+						<label> temp:</label>
+						<input
+							type="float"
+							name="method.mash.temp"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							vlaue={values.method.mash.temp}
+						/>
+						<label> duration:</label>
+						<input
+							type="String"
+							name="method.mash.duration"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							vlaue={values.method.mash.duration}
+						/>
+						<label> wort: </label>
+						<input
+							type="String"
+							name="method.wort"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							vlaue={values.method.wort}
+						/>
+						<label> Ferment: </label>
+						<label>temp:</label>
+						<input
+							type="float"
+							name="method.ferment.temp"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							vlaue={values.method.ferment.temp}
+						/>
+						<label> duration:</label>
+						<input
+							type="String"
+							name="method.ferment.time"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							vlaue={values.method.ferment.time}
+						/>
+
+						{/* Dynamic inputs start here */}
+						<label> Malts / Grain Bill</label>
+						<FieldArray
+							name="ingredients.malt"
+							render={arrayHelpers => (
+								<div>
+									{values.ingredients.malt &&
+									values.ingredients.malt.length > 0 ? (
+										values.ingredients.malt.map((ingredient, index) => (
+											<div key={index} className="field-container">
+												<label> Name:</label>
+												<Field name={`ingredients.malt.${index}.name`} />
+												<label> val:</label>
+												<Field name={`ingredients.malt.${index}.value`} />
+												<label> unit:</label>
+												<Field name={`ingredients.malt.${index}.unit`} />
+												<button
+													type="button"
+													onClick={() => arrayHelpers.remove(index)}
+												>
+													-
+												</button>
+												<button
+													type="button"
+													onClick={() =>
+														arrayHelpers.push({
+															name: '',
+															value: 0.0,
+															unit: 'unit'
+														})
+													}
+												>
+													+
+												</button>
+											</div>
+										))
+									) : (
+										<button type="button" onClick={() => arrayHelpers.push('')}>
+											+ Add Malt
+										</button>
+									)}
+								</div>
+							)}
+						/>
+						<label> Hops: </label>
+						{/* name: '',
+								value: 0,
+								unit: '',
+								sched: '' */}
+						<FieldArray
+							name="ingredients.hops"
+							render={arrayHelpers => (
+								<div>
+									{values.ingredients.hops &&
+									values.ingredients.hops.length > 0 ? (
+										values.ingredients.hops.map((ingredient, index) => (
+											<div key={index} className="field-container">
+												<label> Name:</label>
+												<Field name={`ingredients.hops.${index}.name`} />
+												<label> val:</label>
+												<Field name={`ingredients.hops.${index}.value`} />
+												<label> unit:</label>
+												<Field name={`ingredients.hops.${index}.unit`} />
+												<label> Schedule:</label>
+												<Field name={`ingredients.hops.${index}.sched`} />
+												<button
+													type="button"
+													onClick={() => arrayHelpers.remove(index)}
+												>
+													-
+												</button>
+												<button
+													type="button"
+													onClick={() =>
+														arrayHelpers.push({
+															name: '',
+															value: 0.0,
+															unit: 'unit'
+														})
+													}
+												>
+													+
+												</button>
+											</div>
+										))
+									) : (
+										<button type="button" onClick={() => arrayHelpers.push('')}>
+											+ Add Hop
+										</button>
+									)}
+								</div>
+							)}
+						/>
+						<label>Yeast:</label>
+						<input
+							type="string"
+							name="ingredients.yeast"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							vlaue={values.ingredients.yeast}
+						/>
+						<button type="submit">Submit</button>
+					</form>
+				)}
+			</Formik>
+			{/* <form onSubmit={handleSubmit}>
 				<label>
 					Brew Name
 					<input type="text" ref={name} />
@@ -190,7 +377,7 @@ export default function NewBeerForm(props) {
 						<input type="submit" />
 					</label>
 				</span>
-			</form>
+			</form> */}
 		</div>
 	);
 }

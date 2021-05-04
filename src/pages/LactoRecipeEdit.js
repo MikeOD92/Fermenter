@@ -138,12 +138,30 @@ export default function EditLactoFerment(props) {
 			);
 			const data = await response.json();
 			setlactoFerment(data);
-			console.log('out res was:');
-			console.log(data);
 		} catch (error) {
 			console.error(error);
 		} finally {
 			window.location.assign(`/lactoferments`); // /${props.match.params.id}
+		}
+	};
+
+	const handleDelete = async e => {
+		e.preventDefault();
+		try {
+			const response = await fetch(
+				`/api/lactoferments/${props.match.params.id}`,
+				{
+					method: 'DELETE',
+					header: {
+						'content-Type': 'application/json'
+					}
+				}
+			);
+			const data = await response.json();
+		} catch (error) {
+			console.error(error);
+		} finally {
+			window.location.assign('/');
 		}
 	};
 
@@ -257,6 +275,8 @@ export default function EditLactoFerment(props) {
 
 				<button type={'submit'}>submit</button>
 			</form>
+
+			<button onClick={handleDelete}> Delete Recipe</button>
 		</div>
 	);
 }

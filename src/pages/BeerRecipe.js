@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function BeerRecipe(props) {
-	const [beer, setBeer] = useState({});
+	const [currentBeer, setCurrentBeer] = useState({});
 	const [logs, updateLogs] = useState([]);
 
 	useEffect(() => {
@@ -10,7 +10,7 @@ export default function BeerRecipe(props) {
 			try {
 				const response = await fetch(`/api/beers/${props.match.params.id}`);
 				const data = await response.json();
-				setBeer(data);
+				setCurrentBeer(data);
 				updateLogs([...data.notes]);
 			} catch (error) {
 				console.error(error);
@@ -32,7 +32,7 @@ export default function BeerRecipe(props) {
 				body: JSON.stringify({
 					title: noteTitle.current.value,
 					notes: notes.current.value,
-					beerID: beer._id
+					beerID: currentBeer._id
 				})
 			});
 			const data = await response.json();
@@ -63,24 +63,42 @@ export default function BeerRecipe(props) {
 	return (
 		<div className="beer-recipe">
 			<div className="recipe-head">
-				{beer.name ? <h1>{beer.name}</h1> : ''}
-				{beer.style ? <h2>{beer.style}</h2> : ''}
-				{beer.description ? <p>{beer.description}</p> : ''}
-				{beer.abv ? <h4> abv: {beer.abv}</h4> : ''}
-				{beer.ibu ? <h4> ibu: {beer.ibu}</h4> : ''}
+				{currentBeer.name ? <h1>{currentBeer.name}</h1> : ''}
+				{currentBeer.style ? <h2>{currentBeer.style}</h2> : ''}
+				{currentBeer.description ? <p>{currentBeer.description}</p> : ''}
+				{currentBeer.abv ? <h4> abv: {currentBeer.abv}</h4> : ''}
+				{currentBeer.ibu ? <h4> ibu: {currentBeer.ibu}</h4> : ''}
+				{currentBeer.volume ? (
+					<h4>
+						{' '}
+						yield: {currentBeer.volume.value} {currentBeer.volume.unit}{' '}
+					</h4>
+				) : (
+					''
+				)}
 			</div>
-			<div>
-				{' '}
-				<h2> ingredients</h2>
-				<h4> Grain Bill/ Malts</h4>
-				{/* /////////////////////////////////// */}
-				{beer.ingredients ? (
+			<br />
+			<div className="instructions">
+				<h3>Mash</h3>
+				{currentBeer.method ? (
 					<div>
-						{beer.ingredients.malt.map((item, index) => {
+						<p>
+							{' '}
+							steep gains at {currentBeer.method.mash.temp} degrees for{' '}
+							{currentBeer.method.mash.duration} mins{' '}
+						</p>
+					</div>
+				) : (
+					''
+				)}
+				<h5> Grain Bill/ Malts</h5>
+				{currentBeer.ingredients ? (
+					<div>
+						{currentBeer.ingredients.malt.map((item, index) => {
 							return (
 								<p key={`${item.name}${index}`}>
 									{' '}
-									{item.name} :: {item.amount.value} {item.amount.unit}
+									{item.name} :: {item.value} {item.unit}
 								</p>
 							);
 						})}
@@ -88,20 +106,23 @@ export default function BeerRecipe(props) {
 				) : (
 					''
 				)}
-				<h4>Hops</h4>
-				{beer.ingredients ? (
+				<h3>Wort</h3>
+				{currentBeer.method ? (
 					<div>
-						{beer.ingredients.hops.map((item, index) => {
+						<p> Boil for: {currentBeer.method.wort}</p>
+					</div>
+				) : (
+					''
+				)}
+				<h5>Hop Schedule</h5>
+				{currentBeer.ingredients ? (
+					<div>
+						{currentBeer.ingredients.hops.map((item, index) => {
 							return (
 								<div key={`${item.name}${index}`}>
-									<h5>{item.name}</h5> <br />
-									<ul>
-										<li key={`${item.amount.unit}${index}`}>
-											{item.amount.value} {item.amount.unit}
-										</li>
-										<li key={item.add}>add: {item.add}</li>
-										<li key={item.attribute}> attribute: {item.attribute}</li>
-									</ul>
+									<p>
+										{item.sched} : {item.name} : {item.value} {item.unit}
+									</p>
 								</div>
 							);
 						})}
@@ -109,50 +130,17 @@ export default function BeerRecipe(props) {
 				) : (
 					''
 				)}
+
 				<h4> Yeast</h4>
-				{beer.ingredients ? <p> {beer.ingredients.yeast}</p> : ''}
-			</div>
-			<div className="instructions">
-				<h3> Yeild</h3>
-				{beer.volume ? (
-					<div>
-						<p>
-							{' '}
-							Makes : {beer.volume.value} {beer.volume.unit}
-						</p>
-					</div>
-				) : (
-					''
-				)}
-				{beer.boil ? (
-					<div>
-						<p>
-							{' '}
-							Boil : {beer.boil.value} {beer.boil.unit}{' '}
-						</p>
-					</div>
-				) : (
-					''
-				)}
-				<h3>Mash</h3>
-				{beer.method ? (
-					<div>
-						<p>
-							{' '}
-							steep gains at {beer.method.mash.temp}C for{' '}
-							{beer.method.mash.duration} mins{' '}
-						</p>
-					</div>
-				) : (
-					''
-				)}
+				{currentBeer.ingredients ? <p> {currentBeer.ingredients.yeast}</p> : ''}
+
 				<h3>Ferment</h3>
-				{beer.method ? (
+				{currentBeer.method ? (
 					<div>
 						<p>
 							{' '}
-							ferment at {beer.method.ferment.temp}C for{' '}
-							{beer.method.ferment.time}{' '}
+							ferment at {currentBeer.method.ferment.temp} degrees for{' '}
+							{currentBeer.method.ferment.time}{' '}
 						</p>
 					</div>
 				) : (
@@ -169,14 +157,14 @@ export default function BeerRecipe(props) {
 					</label>
 					<label>
 						Notes:
-						<input type="text-area" ref={notes} />
+						<input type="text" ref={notes} />
 					</label>
 					<input type="submit" vale="add notes" />
 				</form>
 
 				<ul>
-					{beer.notes
-						? beer.notes.map((note, index) => {
+					{currentBeer.notes
+						? currentBeer.notes.map((note, index) => {
 								return (
 									<li key={`${note._id}${index}`}>
 										<h4> {note.title}</h4>

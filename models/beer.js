@@ -6,6 +6,7 @@ const beerSchema = new Schema({
     description: String, 
     abv: Number,
     ibu: Number,
+
     volume: {
       value: Number, 
       unit: String
@@ -14,11 +15,10 @@ const beerSchema = new Schema({
     method:{  
       mash: {
         temp: Number, 
-        duration: Number,
+        duration: String,
       },    
-      wort:{
-        time: String, 
-      },
+      wort: String,
+      
       ferment: {
         temp: Number, 
         time: String
@@ -38,7 +38,6 @@ const beerSchema = new Schema({
             value: Number,
             unit: String,
             sched: String,
-            attribute: String
           },
         ],
         yeast: String
