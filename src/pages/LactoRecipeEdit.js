@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import DynamicMainInput from '../components/DynamicMainInput';
+import DynamicOtherInput from '../components/DynamicOtherInput';
 
 export default function EditLactoFerment(props) {
 	const [lactoFerment, setlactoFerment] = useState({});
@@ -29,9 +30,12 @@ export default function EditLactoFerment(props) {
 
 		const value = Object.fromEntries(data.entries());
 		let main = [];
+		let other = [];
 		let volum = [];
 		let ferm = [];
+		let salt = [];
 		let mainIngInput = [];
+		let otherIngInput = [];
 
 		// goes throguh the formdata obj and pushes every key with main in the name to an array
 		// then deletes those keys from the value obj
@@ -43,6 +47,7 @@ export default function EditLactoFerment(props) {
 		});
 
 		/// loop over the array by getting on the names that include main and push every 3 inputs as an object to the
+
 		/// mainIngInput array
 		for (let i = 0; i < main.length; i += 3) {
 			mainIngInput.push({
@@ -51,14 +56,39 @@ export default function EditLactoFerment(props) {
 				unit: main[i + 2]
 			});
 		}
+
 		// repeate to get values from other array
+		Object.keys(value).map(key => {
+			if (key.includes('other')) {
+				other.push(value[key]);
+				delete value[key];
+			}
+		});
+
+		/// otherIngInput arry
+		for (let i = 0; i < other.length; i += 3) {
+			otherIngInput.push({
+				name: other[i],
+				value: other[i + 1],
+				unit: other[i + 2]
+			});
+		}
+
+		// get salt info
+		Object.keys(value).map(key => {
+			if (key.includes('salt')) {
+				salt.push(value[key]);
+				delete value[key];
+			}
+		});
+
 		/// put this new aray of objects as key main into the form value obj
 		value['ingredients'] = {
 			main: mainIngInput,
-			other: [],
+			other: otherIngInput,
 			salt: {
-				value: 3,
-				unit: 'tbsp'
+				value: salt[0],
+				unit: salt[1]
 			}
 		};
 		/// so this works and submits correctly because it has the correct inputs. in the right structure, we need to
@@ -191,7 +221,7 @@ export default function EditLactoFerment(props) {
 				) : (
 					''
 				)}
-				{/* {lactoFerment.ingredients ? (
+				{lactoFerment.ingredients ? (
 					<div>
 						{' '}
 						<label> Spices and Aromatics: </label>
@@ -205,7 +235,25 @@ export default function EditLactoFerment(props) {
 					</div>
 				) : (
 					''
-				)} */}
+				)}
+
+				{lactoFerment.ferment ? (
+					<div>
+						<label>Salt</label>
+						<input
+							type="string"
+							name={'salt.value'}
+							defaultValue={lactoFerment.ingredients.salt.value}
+						/>
+						<input
+							type="string"
+							name={'salt.unit'}
+							defaultValue={lactoFerment.ingredients.salt.unit}
+						/>
+					</div>
+				) : (
+					''
+				)}
 
 				<button type={'submit'}>submit</button>
 			</form>

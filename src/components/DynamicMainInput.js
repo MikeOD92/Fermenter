@@ -14,6 +14,7 @@ export default function DynamicMainInput(props) {
 	};
 
 	const remove = e => {
+		e.preventDefault();
 		props.lactoFerment.ingredients.main.splice(e.target.id, 1);
 		props.set(props.lactoFerment);
 		apiCall();
