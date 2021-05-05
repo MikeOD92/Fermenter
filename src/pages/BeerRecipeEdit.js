@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import DynamicMaltInput from '../components/DynamicMaltInput';
+import DynamicHopsInput from '../components/DynamicHopInput';
 
 export default function NewBeerForm(props) {
 	const [beer, setBeer] = useState({});
@@ -26,13 +27,119 @@ export default function NewBeerForm(props) {
 		const data = new FormData(e.target);
 		const value = Object.fromEntries(data.entries());
 
-		let malt = [];
+		let malt = []; // grab keys with malt
+		let maltInput = []; // parse keys into array of objects
 		let hops = [];
-		let method = [];
-		let ferm = [];
+		let hopsInput = [];
+		let yeastInput = '';
 
-		console.log(value);
-		// apiCall()
+		let mash = [];
+		let mashInput = null;
+		let wort = '';
+		let ferm = [];
+		let fermInput = null;
+
+		let volume = [];
+
+		// make malt array with all keys
+		Object.keys(value).map(key => {
+			if (key.includes('malt')) {
+				malt.push(value[key]);
+				delete value[key];
+			}
+		});
+
+		// make object array out of first array
+		for (let i = 0; i < malt.length; i += 3) {
+			maltInput.push({
+				name: malt[i],
+				value: malt[i + 1],
+				unit: malt[i + 2]
+			});
+		}
+		/// format hops
+		Object.keys(value).map(key => {
+			if (key.includes('hops')) {
+				hops.push(value[key]);
+				delete value[key];
+			}
+		});
+
+		for (let i = 0; i < hops.length; i += 4) {
+			hopsInput.push({
+				name: hops[i],
+				value: hops[i + 1],
+				unit: hops[i + 2],
+				sched: hops[i + 3]
+			});
+		}
+
+		Object.keys(value).map(key => {
+			if (key.includes('yeast')) {
+				yeastInput = value[key];
+				delete value[key];
+			}
+		});
+
+		value['ingredients'] = {
+			malt: maltInput,
+			hops: hopsInput,
+			yeast: yeastInput
+		};
+		//////// above this parses the ingredient object from the form.
+		// below parse the method object
+
+		Object.keys(value).map(key => {
+			if (key.includes('mash')) {
+				mash.push(value[key]);
+				delete value[key];
+			}
+		});
+
+		mashInput = {
+			temp: mash[0],
+			duration: mash[1]
+		};
+
+		Object.keys(value).map(key => {
+			if (key.includes('ferment')) {
+				ferm.push(value[key]);
+				delete value[key];
+			}
+		});
+
+		fermInput = {
+			temp: ferm[0],
+			time: ferm[1]
+		};
+
+		Object.keys(value).map(key => {
+			if (key.includes('wort')) {
+				wort = value[key];
+				delete value[key];
+			}
+		});
+
+		value['method'] = {
+			mash: mashInput,
+			ferment: fermInput,
+			wort: wort
+		};
+
+		/// parse volume
+		Object.keys(value).map(key => {
+			if (key.includes('volume')) {
+				volume.push(value[key]);
+				delete value[key];
+			}
+		});
+
+		value['volume'] = {
+			unit: volume[1],
+			value: volume[0]
+		};
+
+		apiCall(value);
 	};
 
 	const apiCall = async value => {
@@ -66,7 +173,7 @@ export default function NewBeerForm(props) {
 		} catch (error) {
 			console.error(error);
 		} finally {
-			window.location.assign('/');
+			window.location.assign('/beers');
 		}
 	};
 
@@ -172,6 +279,7 @@ export default function NewBeerForm(props) {
 				{/* need to have this format everywhere so inputs appear even if a field is empty */}
 
 				{/* DYMAIC INPUT FOR MALTS */}
+				<label> Grain bill:</label>
 				<DynamicMaltInput
 					beer={beer}
 					set={setBeer}
@@ -197,10 +305,18 @@ export default function NewBeerForm(props) {
 				)}
 
 				{/* DYNAMIC INPUTS FOR HOPS */}
+				<label> Hops: </label>
+				<DynamicHopsInput
+					beer={beer}
+					set={setBeer}
+					match={props.match.params.id}
+					updater={updater}
+					setUpdater={setUpdater}
+				/>
 
 				{beer.ingredients ? (
 					<div>
-						<label> Yeast </label>
+						<label> Yeast: </label>
 						<input
 							type="string"
 							name={'ingredients.yeast'}

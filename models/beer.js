@@ -16,7 +16,8 @@ const beerSchema = new Schema({
       mash: {
         temp: Number, 
         duration: String,
-      },    
+      }, 
+      
       wort: String,
       
       ferment: {
