@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import DynamicMaltInput from '../components/DynamicMaltInput';
 
 export default function NewBeerForm(props) {
 	const [beer, setBeer] = useState({});
@@ -171,7 +172,13 @@ export default function NewBeerForm(props) {
 				{/* need to have this format everywhere so inputs appear even if a field is empty */}
 
 				{/* DYMAIC INPUT FOR MALTS */}
-				{/* GOES HERE */}
+				<DynamicMaltInput
+					beer={beer}
+					set={setBeer}
+					match={props.match.params.id}
+					updater={updater}
+					setUpdater={setUpdater}
+				/>
 
 				{beer.method ? (
 					<div>
