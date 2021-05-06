@@ -21,19 +21,14 @@ const routes = [
 		path: '/lactoferments/new'
 	},
 	{
-		Component: LactoRecipeEdit,
-		key: 'LactoRecipeEdit',
-		path: '/lactoferments/:id/edit'
-	},
-	{
 		Component: BeerRecipeEdit,
 		key: 'BeerRecipeEdit',
 		path: '/beers/:id/edit'
 	},
 	{
-		Component: LactoRecipe,
-		key: 'LactoRecipe',
-		path: '/lactoferments/:id'
+		Component: LactoRecipeEdit,
+		key: 'LactoRecipeEdit',
+		path: '/lactoferments/:id/edit'
 	},
 	{
 		Component: BeerRecipe,
@@ -41,14 +36,19 @@ const routes = [
 		path: '/beers/:id'
 	},
 	{
-		Component: LactoFerments,
-		key: 'LactoFerments',
-		path: '/lactoferments'
+		Component: LactoRecipe,
+		key: 'LactoRecipe',
+		path: '/lactoferments/:id'
 	},
 	{
 		Component: Beers,
 		key: 'Beers',
 		path: '/beers'
+	},
+	{
+		Component: LactoFerments,
+		key: 'LactoFerments',
+		path: '/lactoferments'
 	},
 	{
 		Component: App,

@@ -1,91 +1,155 @@
 @import "reset";
 @import "grid";
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Nothing+You+Could+Do&display=swap');
 
-/// font-family: 'Lato', sans-serif;
-//font-family: 'Nothing You Could Do', cursive;
 
-body {
-  font-size: 16px;
-  background: url('https://images.pexels.com/photos/1568757/pexels-photo-1568757.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
-  background-size:cover;
-  font-family: 'Lato', sans-serif;
- 
-}
-.NavBar {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  background-color: rgba(186, 245, 213, 0.8);
-  padding: 5px;
-  box-shadow: 2px 2px 4px black;
+:root{
+  background-color: rgb(255, 213, 107);
+  font-size: 18px;
+  text-align: center;
 }
 #app{
-  h1, h2{
-    font-family: 'Nothing You Could Do', cursive;
-    text-decoration: underline black;
+  .logo{
+    width: 50%;
+    position: relative;
+    top: 1vh;
+    margin: 0 auto;
   }
-  a{
-    color:rgb(199, 18, 18);
-  }
-  .LactoFerments, .Beer-Recipes, .AppPage {
-          background-color: rgba(255,255,255,0.9);
-          //background-color: rgba(186, 245, 213, 0.8);
-          margin: 20px 5vw;
-          padding: 3%;
-          min-height: 50vh;
-          border-bottom:solid 6px rgba(0,0,0,0.6); 
-          border-right:solid 4px rgba(0,0,0,0.6); 
-          clip-path: polygon(0 0%, 38% 0, 44% 18%, 100% 18%, 100% 100%, 0 100%);
-          h1{
-            font-size: 2.6rem;
-          }
-  }
-////////// List show pages
-
-  .LactoFerments, .Beer-Recipes {
-      ul{
-          font-size: 1.3rem;
-          margin: 10px 0px 35px 35px ;
-          line-height: 30px;
-          list-style-type: disc;
-  }}
-//////// New and Edit forms
-
-  .newLactofermentForm, .newbeerForm, .lactofermentEditForm, .beerEditForm{
-    padding: 3%;
-    margin: 20px 5vw;
-    background-color: rgba(255,255,255,0.9);
-    box-shadow:2px 2px 4px black;
-
-    .field-container{
-      border: 2px solid black;
+  .body-container{
+    margin: 0 auto;
+    margin-top: 25px;
+    width: 40%;
+    height:50vh;
+    background-color:black;
+    display: flex;
+    p{
+      margin: 25px;
+      background-color: white;
+      width: 50%;
+      height: 20vh;
+      padding: 20px;
+      font-size: 20px;
+     
     }
-    
-    form{
-      display: grid;
-      grid-template-columns: 50% 50%;
-      grid-template-rows: auto;
-      text-align: right;
-      label{
-       padding: 1%;
-      }
-      input{
-        margin-left: 3%;
-      }
-      .button{
-        grid-column-end: 3;
-      }
-    }
- 
   }
+  
 
-  ////// Recipe pages
-  .lacto-recipe, .beer-recipe{
-    padding: 3%;
-    text-align: left;
-    margin: 20px 5vw;
-    background-color: rgba(255,255,255,0.9);
-  }
+
 }
+
+.NavBar {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 15vh;
+    background-color: rgb(51, 204, 153);
+    padding: 5px;
+    box-shadow: 2px 2px 4px black;
+    a{
+      color: rgb(255, 213, 107);
+      // color: indianred;
+      // width: 20vw;
+      // border: 1px solid black;
+    }
+    .react-icons{
+      height: 10vh;
+      width: 5vw;
+    }
+  }
+// @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Nothing+You+Could+Do&display=swap');
+
+// /// font-family: 'Lato', sans-serif;
+// //font-family: 'Nothing You Could Do', cursive;
+
+// body {
+//   font-size: 16px;
+//   // background: url('https://images.pexels.com/photos/1568757/pexels-photo-1568757.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
+//   background-color:burlywood;
+//   background-size: cover;
+//   font-family: 'Lato', sans-serif;
+ 
+// }
+// // #app{
+// //   background-color:burlywood;
+// // }
+// .NavBar {
+//   position: fixed;
+//   bottom: 0;
+//   display: flex;
+//   justify-content: space-around;
+//   width: 100%;
+//   background-color: rgba(186, 245, 213, 0.8);
+//   padding: 5px;
+//   box-shadow: 2px 2px 4px black;
+// }
+// #app{
+//   h1, h2{
+//     font-family: 'Nothing You Could Do', cursive;
+//     text-decoration: underline black;
+//   }
+//   a{
+//     color:rgb(199, 18, 18);
+//   }
+//   .LactoFerments, .Beer-Recipes, .AppPage {
+//           background-color: rgba(255,255,255,0.9);
+//           //background-color: rgba(186, 245, 213, 0.8);
+//           margin: 20px 5vw;
+//           padding: 3%;
+//           min-height: 50vh;
+//           border-bottom:solid 6px rgba(0,0,0,0.6); 
+//           border-right:solid 4px rgba(0,0,0,0.6); 
+//           clip-path: polygon(0 0%, 38% 0, 44% 18%, 100% 18%, 100% 100%, 0 100%);
+//           h1{
+//             font-size: 2.6rem;
+//           }
+//   }
+// ////////// List show pages
+
+//   .LactoFerments, .Beer-Recipes {
+//       ul{
+//           font-size: 1.3rem;
+//           margin: 10px 0px 35px 35px ;
+//           line-height: 30px;
+//           list-style-type: disc;
+//   }}
+// //////// New and Edit forms
+
+//   .newLactofermentForm, .newbeerForm, .lactofermentEditForm, .beerEditForm{
+//     padding: 3%;
+//     margin: 20px 5vw;
+//     background-color: rgba(255,255,255,0.9);
+//     box-shadow:2px 2px 4px black;
+
+//     .field-container{
+//       border: 2px solid black;
+//     }
+    
+//     form{
+//       display: grid;
+//       grid-template-columns: 50% 50%;
+//       grid-template-rows: auto;
+//       text-align: right;
+//       label{
+//         padding: 1%;
+//       }
+//       input{
+//         margin-left: 3%;
+//       }
+//       .button{
+//         grid-column-end: 3;
+//       }
+//     }
+ 
+//   }
+
+//   ////// Recipe pages
+//   .lacto-recipe, .beer-recipe{
+//     padding: 3%;
+//     text-align: left;
+//     margin: 20px 5vw;
+//     background-color: rgba(255,255,255,0.9);
+//   }
+// }
 
