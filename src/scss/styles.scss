@@ -1,9 +1,13 @@
 @import "reset";
 @import "grid";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 
 
 :root{
-  background-color: rgb(255, 213, 107);
+  background-color: rgb(255, 220, 131);
+  // background-color: rgb(210, 104, 48);
+  // background-color: indianred;
+  font-family: 'Noto Sans JP', sans-serif;
   font-size: 18px;
   text-align: center;
 }
@@ -16,15 +20,18 @@
   }
   .body-container{
     margin: 0 auto;
-    margin-top: 25px;
     width: 60%;
-    height:45vh;
+    height:60vh;
     background-color:whitesmoke;
     display: flex;
+    flex-direction: column;
     clip-path: polygon(0 0%, 38% 0, 44% 18%, 100% 18%, 100% 100%, 0 100%);
-
+    position: relative;
+    bottom: 3vh;
+    z-index: -10;
     p{
       margin: 25px;
+      margin-top: 10vh;
       height: 15vh;
       padding: 20px;
       font-size: 20px;
@@ -32,11 +39,32 @@
       top: 5vh;
       line-height: 1.5rem;
       text-align: left;
+
+    }
+    .center{
+      width: 50%;
+      text-align: left;
+      align-self: center;
+      justify-content: center;
+      .react-icons{
+        width: 3vw;
+        height: 5vh;
+      }
+      li{
+        border-bottom: 1px solid black;
+      }
     }
   }
   
 
 
+}
+.beer-recipe{
+  clip-path: polygon(0 0%, 38% 0, 44% 18%, 100% 18%, 100% 100%, 0 100%);
+  background-color: whitesmoke;
+  margin: 20px;
+  padding: 20px;
+  z-index: -100;
 }
 
 .NavBar {
@@ -50,6 +78,7 @@
     background-color: rgb(51, 204, 153);
     padding: 5px;
     box-shadow: 2px 2px 4px black;
+    z-index: 300;
     a{
       // color: rgb(255, 213, 107);
       color: indianred;
