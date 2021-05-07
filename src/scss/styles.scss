@@ -4,9 +4,10 @@
 
 
 :root{
-  background-color: rgb(255, 220, 131);
+  background-color: #ffdc83;
+  // background-image: url('https://images.pexels.com/photos/1568757/pexels-photo-1568757.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
+  // background-blend-mode: difference;
   // background-color: rgb(210, 104, 48);
-  // background-color: indianred;
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 18px;
   text-align: center;
@@ -63,6 +64,7 @@
   clip-path: polygon(0 0%, 38% 0, 44% 18%, 100% 18%, 100% 100%, 0 100%);
   background-color: whitesmoke;
   margin: 20px;
+  margin-bottom: 20vh;
   padding: 20px;
   z-index: -100;
 }
@@ -137,44 +139,44 @@
 //             font-size: 2.6rem;
 //           }
 //   }
-// ////////// List show pages
+////////// List show pages
 
-//   .LactoFerments, .Beer-Recipes {
-//       ul{
-//           font-size: 1.3rem;
-//           margin: 10px 0px 35px 35px ;
-//           line-height: 30px;
-//           list-style-type: disc;
-//   }}
-// //////// New and Edit forms
+  .LactoFerments, .Beer-Recipes {
+      ul{
+          font-size: 1.3rem;
+          margin: 10px 0px 35px 35px ;
+          line-height: 30px;
+          list-style-type: disc;
+  }}
+//////// New and Edit forms
 
-//   .newLactofermentForm, .newbeerForm, .lactofermentEditForm, .beerEditForm{
-//     padding: 3%;
-//     margin: 20px 5vw;
-//     background-color: rgba(255,255,255,0.9);
-//     box-shadow:2px 2px 4px black;
+  .newLactofermentForm, .newbeerForm, .lactofermentEditForm, .beerEditForm{
+    padding: 3%;
+    margin: 20px 5vw;
+    margin-bottom: 15vh;
+    background-color: whitesmoke;
 
-//     .field-container{
-//       border: 2px solid black;
-//     }
+
+    .field-container{
+      border: 2px solid black;
+    }
     
-//     form{
-//       display: grid;
-//       grid-template-columns: 50% 50%;
-//       grid-template-rows: auto;
-//       text-align: right;
-//       label{
-//         padding: 1%;
-//       }
-//       input{
-//         margin-left: 3%;
-//       }
-//       .button{
-//         grid-column-end: 3;
-//       }
-//     }
+    form{
+      display: flex;
+      flex-direction: column;
+      align-items:flex-end;
+      label{
+        padding: 10px;
+      }
+      input{
+        width: 15vw;
+      }
+      // .button{
+        
+      // }
+    }
  
-//   }
+  }
 
 //   ////// Recipe pages
 //   .lacto-recipe, .beer-recipe{
