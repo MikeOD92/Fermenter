@@ -113,7 +113,7 @@
           font-size: 1.3rem;
           margin: 10px 0px 35px 35px ;
           line-height: 30px;
-          list-style-type: disc;
+          list-style-type: none;
   }}
 //////// New and Edit forms
 
@@ -145,6 +145,8 @@
       }
       .style-field{
         align-self: flex-start;
+        position: relative;
+        left: 1vw;
       }
       .desc-field{
         // align-self: flex-start;
