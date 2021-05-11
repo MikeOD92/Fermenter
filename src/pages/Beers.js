@@ -18,21 +18,23 @@ export default function Beers(props) {
 
 	return (
 		<div className="Beer-Recipes">
-			<h1> Beer Recipes</h1>
-			<ul>
-				{beers.map(item => {
-					//how do i make it to ths show page
-					return (
-						<Link
-							to={`/beers/${item._id}`}
-							key={`${item._id}${item.name}`}
-							props={props}
-						>
-							<li> {item.name} </li>{' '}
-						</Link>
-					);
-				})}
-			</ul>
+			<div className="list-container">
+				<h1> Beer Recipes</h1>
+				<ul>
+					{beers.map(item => {
+						//how do i make it to ths show page
+						return (
+							<Link
+								to={`/beers/${item._id}`}
+								key={`${item._id}${item.name}`}
+								props={props}
+							>
+								<li> {item.name} </li>{' '}
+							</Link>
+						);
+					})}
+				</ul>
+			</div>
 		</div>
 	);
 }

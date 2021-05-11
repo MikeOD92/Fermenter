@@ -64,159 +64,180 @@ export default function NewLactoFerment(props) {
 					handleSubmit
 				}) => (
 					<form onSubmit={handleSubmit}>
-						<label> Name:</label>
-						<input
-							type="string"
-							name="name"
-							onChange={handleChange}
-							onBlur={handleBlur}
-							value={values.name}
-						/>
-						<label> Description:</label>
-						<input
-							type="string"
-							name="description"
-							onChange={handleChange}
-							onBlur={handleBlur}
-							value={values.description}
-						/>
-						<label> Volume:</label>
-						<input
-							type="float"
-							name="volume.value"
-							onChange={handleChange}
-							onBlur={handleBlur}
-							value={values.volume.value}
-						/>
-						<input
-							type="string"
-							name="volume.unit"
-							onChange={handleChange}
-							onBlur={handleBlur}
-							value={values.volume.unit}
-						/>
-
-						<label>Ferment</label>
-						<label>temp</label>
-						<input
-							type="string"
-							name="ferment.temp"
-							onChange={handleChange}
-							onBlur={handleBlur}
-							value={values.ferment.temp}
-						/>
-						<label>duration</label>
-						<input
-							type="string"
-							name="ferment.duration"
-							onChange={handleChange}
-							onBlur={handleBlur}
-							value={values.ferment.duration}
-						/>
+						<div className="name-field">
+							<label> Name:</label>
+							<input
+								type="string"
+								name="name"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								value={values.name}
+							/>
+						</div>
+						<div className="desc-field">
+							<label> Description:</label>
+							<input
+								type="string"
+								name="description"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								value={values.description}
+							/>
+						</div>
+						<div>
+							<label> Volume:</label>
+							<input
+								type="float"
+								name="volume.value"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								value={values.volume.value}
+							/>
+						</div>
+						<div>
+							<input
+								type="string"
+								name="volume.unit"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								value={values.volume.unit}
+							/>
+						</div>
+						<div>
+							<label>Ferment</label>
+							<label>temp</label>
+							<input
+								type="string"
+								name="ferment.temp"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								value={values.ferment.temp}
+							/>
+							<label>duration</label>
+							<input
+								type="string"
+								name="ferment.duration"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								value={values.ferment.duration}
+							/>
+						</div>
 						{/* //////////////////HERE*/}
-						<label> ingredients:</label>
-						{/* array feild */}
-						<label> Main:</label>
-						<FieldArray
-							name="ingredients.main"
-							render={arrayHelpers => (
-								<div>
-									{values.ingredients.main &&
-									values.ingredients.main.length > 0 ? (
-										values.ingredients.main.map((ingredient, index) => (
-											<div key={index} className="field-container">
-												<label> Name:</label>
-												<Field name={`ingredients.main.${index}.name`} />
-												<label> val:</label>
-												<Field name={`ingredients.main.${index}.value`} />
-												<label> unit:</label>
-												<Field name={`ingredients.main.${index}.unit`} />
-												<button
-													type="button"
-													onClick={() => arrayHelpers.remove(index)}
-												>
-													-
-												</button>
-												<button
-													type="button"
-													onClick={() =>
-														arrayHelpers.push({
-															name: '',
-															value: 0.0,
-															unit: 'unit'
-														})
-													}
-												>
-													+
-												</button>
-											</div>
-										))
-									) : (
-										<button type="button" onClick={() => arrayHelpers.push('')}>
-											Add ingredients
-										</button>
-									)}
-								</div>
-							)}
-						/>
-						<label> salt</label>
-						<input
-							type="float"
-							name="ingredients.salt.value"
-							onChange={handleChange}
-							onBlur={handleBlur}
-							value={values.ingredients.salt.value}
-						/>
-						<input
-							type="string"
-							name="ingredients.salt.unit"
-							onChange={handleChange}
-							onBlur={handleBlur}
-							value={values.ingredients.salt.unit}
-						/>
-						<label> {'Spices & aromatics:'} </label>
-						<FieldArray
-							name="ingredients.other"
-							render={arrayHelpers => (
-								<div>
-									{values.ingredients.other &&
-									values.ingredients.other.length > 0 ? (
-										values.ingredients.other.map((ingredient, index) => (
-											<div key={index} className="field-container">
-												<label> Name:</label>
-												<Field name={`ingredients.other.${index}.name`} />
-												<label> val:</label>
-												<Field name={`ingredients.other.${index}.value`} />
-												<label> unit:</label>
-												<Field name={`ingredients.other.${index}.unit`} />
-												<button
-													type="button"
-													onClick={() => arrayHelpers.remove(index)}
-												>
-													-
-												</button>
-												<button
-													type="button"
-													onClick={() =>
-														arrayHelpers.push({
-															name: '',
-															value: 0.0,
-															unit: 'unit'
-														})
-													}
-												>
-													+
-												</button>
-											</div>
-										))
-									) : (
-										<button type="button" onClick={() => arrayHelpers.push('')}>
-											{'Add Aromatics & Spices'}
-										</button>
-									)}
-								</div>
-							)}
-						/>
+						<div>
+							<label> ingredients:</label>
+							{/* array feild */}
+							<label> Main:</label>
+							<FieldArray
+								name="ingredients.main"
+								render={arrayHelpers => (
+									<div>
+										{values.ingredients.main &&
+										values.ingredients.main.length > 0 ? (
+											values.ingredients.main.map((ingredient, index) => (
+												<div key={index} className="field-container">
+													<label> Name:</label>
+													<Field name={`ingredients.main.${index}.name`} />
+													<label> val:</label>
+													<Field name={`ingredients.main.${index}.value`} />
+													<label> unit:</label>
+													<Field name={`ingredients.main.${index}.unit`} />
+													<button
+														type="button"
+														onClick={() => arrayHelpers.remove(index)}
+													>
+														-
+													</button>
+													<button
+														type="button"
+														onClick={() =>
+															arrayHelpers.push({
+																name: '',
+																value: 0.0,
+																unit: 'unit'
+															})
+														}
+													>
+														+
+													</button>
+												</div>
+											))
+										) : (
+											<button
+												type="button"
+												onClick={() => arrayHelpers.push('')}
+											>
+												Add ingredients
+											</button>
+										)}
+									</div>
+								)}
+							/>
+						</div>
+						<div>
+							<label> salt</label>
+							<input
+								type="float"
+								name="ingredients.salt.value"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								value={values.ingredients.salt.value}
+							/>
+							<input
+								type="string"
+								name="ingredients.salt.unit"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								value={values.ingredients.salt.unit}
+							/>
+						</div>
+						<div>
+							<label> {'Spices & aromatics:'} </label>
+							<FieldArray
+								name="ingredients.other"
+								render={arrayHelpers => (
+									<div>
+										{values.ingredients.other &&
+										values.ingredients.other.length > 0 ? (
+											values.ingredients.other.map((ingredient, index) => (
+												<div key={index} className="field-container">
+													<label> Name:</label>
+													<Field name={`ingredients.other.${index}.name`} />
+													<label> val:</label>
+													<Field name={`ingredients.other.${index}.value`} />
+													<label> unit:</label>
+													<Field name={`ingredients.other.${index}.unit`} />
+													<button
+														type="button"
+														onClick={() => arrayHelpers.remove(index)}
+													>
+														-
+													</button>
+													<button
+														type="button"
+														onClick={() =>
+															arrayHelpers.push({
+																name: '',
+																value: 0.0,
+																unit: 'unit'
+															})
+														}
+													>
+														+
+													</button>
+												</div>
+											))
+										) : (
+											<button
+												type="button"
+												onClick={() => arrayHelpers.push('')}
+											>
+												{'Add Aromatics & Spices'}
+											</button>
+										)}
+									</div>
+								)}
+							/>
+						</div>
 						<button type="submit">Submit</button>
 					</form>
 				)}

@@ -70,10 +70,10 @@ export default function DynamicHopsInput(props) {
 						key={`${props.beer.ingredients.hops[index].sched}${index}`}
 					/>
 
-					<button onClick={add}>+</button>
 					<button onClick={remove} id={index}>
 						-
 					</button>
+					<button onClick={add}>+</button>
 				</div>
 			);
 		})

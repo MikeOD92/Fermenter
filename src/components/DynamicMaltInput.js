@@ -62,10 +62,10 @@ export default function DynamicMaltInput(props) {
 						key={`${props.beer.ingredients.malt[index].unit}${index}`}
 					/>
 
-					<button onClick={add}>+</button>
 					<button onClick={remove} id={index}>
 						-
 					</button>
+					<button onClick={add}>+</button>
 				</div>
 			);
 		})
