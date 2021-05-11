@@ -18,20 +18,22 @@ export default function Lactoferments(props) {
 
 	return (
 		<div className="LactoFerments">
-			<h1> Lacto Ferments</h1>
-			<ul>
-				{ferments.map(item => {
-					//how do i make it to ths show page
-					return (
-						<Link
-							to={`/lactoferments/${item._id}`}
-							key={`${item._id}${item.name}`}
-						>
-							<li> {item.name} </li>{' '}
-						</Link>
-					);
-				})}
-			</ul>
+			<div className="list-container">
+				<h1> Lactic Acid Fermentations</h1>
+				<ul>
+					{ferments.map(item => {
+						//how do i make it to ths show page
+						return (
+							<Link
+								to={`/lactoferments/${item._id}`}
+								key={`${item._id}${item.name}`}
+							>
+								<li> {item.name} </li>{' '}
+							</Link>
+						);
+					})}
+				</ul>
+			</div>
 		</div>
 	);
 }

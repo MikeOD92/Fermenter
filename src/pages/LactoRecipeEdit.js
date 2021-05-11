@@ -169,7 +169,7 @@ export default function EditLactoFerment(props) {
 		<div className="lactofermentEditForm">
 			<form onSubmit={submit}>
 				{lactoFerment.name ? (
-					<div>
+					<div className="name-field">
 						<label>Name:</label>
 						<input type="text" name={'name'} defaultValue={lactoFerment.name} />
 					</div>
@@ -177,7 +177,7 @@ export default function EditLactoFerment(props) {
 					''
 				)}
 				{lactoFerment.description ? (
-					<div>
+					<div className="desc-field">
 						<label>description:</label>
 						<input
 							type="text"
