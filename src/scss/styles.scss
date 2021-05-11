@@ -75,11 +75,7 @@
     top: 5vh;
     margin-bottom: 20vh;
   }
-  .list-container{
-    position: relative;
-    top: 10vh;
-    margin-bottom: 20vh;
-  }
+  
 }
 
 .NavBar {
@@ -109,12 +105,38 @@
 ////////// List show pages
 
   .LactoFerments, .Beer-Recipes {
+    min-height: 120vh;
+
+    .list-container{
+      position: relative;
+      top: 10vh;
+      margin-bottom: 20vh;
       ul{
-          font-size: 1.3rem;
-          margin: 10px 0px 35px 35px ;
-          line-height: 30px;
-          list-style-type: none;
-  }}
+        font-size: 1.3rem;
+        margin: 10px 0px 35px 35px ;
+        line-height: 30px;
+        list-style-type: none;
+        width: 50vw;
+        text-align: left;
+      }
+        a{
+          color:rgb(32, 130, 97);
+          margin:5px;
+        }
+        a:visited{
+          color:rgb(32, 130, 97);
+        }
+      }
+      h1{
+      text-align: left;
+      position: relative;
+      top: -60px;
+      font-size: 30px;
+      width: 30%;
+    }
+    }
+   
+      
 //////// New and Edit forms
 
   .newLactofermentForm,
