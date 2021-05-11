@@ -72,9 +72,8 @@ export default function NewBeerForm(props) {
 					handleSubmit
 				}) => (
 					<form onSubmit={handleSubmit}>
-						<label>
-							{' '}
-							Name:
+						<div className="name-field">
+							<label> Name:</label>
 							<input
 								type="string"
 								name="name"
@@ -82,10 +81,9 @@ export default function NewBeerForm(props) {
 								onBlur={handleBlur}
 								value={values.name}
 							/>
-						</label>
-						<label>
-							{' '}
-							Style:
+						</div>
+						<div className="style-field">
+							<label>Style: {'       '}</label>
 							<input
 								type="string"
 								name="style"
@@ -93,10 +91,9 @@ export default function NewBeerForm(props) {
 								onBlur={handleBlur}
 								value={values.style}
 							/>
-						</label>
-						<label>
-							{' '}
-							Description:
+						</div>
+						<div className="desc-field">
+							<label>Description:</label>
 							<input
 								type="string"
 								name="description"
@@ -104,11 +101,10 @@ export default function NewBeerForm(props) {
 								onBlur={handleBlur}
 								value={values.description}
 							/>
-						</label>
-						{/* beer specs */}
-						<label>
-							{' '}
-							ABV:
+						</div>
+						<div>
+							{/* beer specs */}
+							<label>ABV:</label>
 							<input
 								type="float"
 								name="abv"
@@ -116,10 +112,9 @@ export default function NewBeerForm(props) {
 								onBlur={handleBlur}
 								value={values.abv}
 							/>
-						</label>
-						<label>
-							{' '}
-							IBU:
+						</div>
+						<div>
+							<label>IBU:</label>
 							<input
 								type="float"
 								name="ibu"
@@ -127,13 +122,11 @@ export default function NewBeerForm(props) {
 								onBlur={handleBlur}
 								value={values.ibu}
 							/>
-						</label>
+						</div>
 
 						{/* volume */}
-
-						<label>
-							{' '}
-							Volume:
+						<div>
+							<label> Volume:</label>
 							<input
 								type="float"
 								name="volume.value"
@@ -148,13 +141,11 @@ export default function NewBeerForm(props) {
 								onBlur={handleBlur}
 								value={values.volume.unit}
 							/>
-						</label>
+						</div>
 						{/* method */}
-
-						<label> Method: </label>
-						<label>
-							{' '}
-							Mash:
+						<div>
+							<label> Method: </label>
+							<label>Mash:</label>
 							<label> temp:</label>
 							<input
 								type="float"
@@ -171,10 +162,9 @@ export default function NewBeerForm(props) {
 								onBlur={handleBlur}
 								vlaue={values.method.mash.duration}
 							/>
-						</label>
-						<label>
-							{' '}
-							wort:
+						</div>
+						<div>
+							<label>wort:</label>
 							<input
 								type="String"
 								name="method.wort"
@@ -182,32 +172,10 @@ export default function NewBeerForm(props) {
 								onBlur={handleBlur}
 								vlaue={values.method.wort}
 							/>
-						</label>
-						<label>
-							{' '}
-							Ferment:
-							<label>temp:</label>
-							<input
-								type="float"
-								name="method.ferment.temp"
-								onChange={handleChange}
-								onBlur={handleBlur}
-								vlaue={values.method.ferment.temp}
-							/>
-							<label> duration:</label>
-							<input
-								type="String"
-								name="method.ferment.time"
-								onChange={handleChange}
-								onBlur={handleBlur}
-								vlaue={values.method.ferment.time}
-							/>
-						</label>
-
-						{/* Dynamic inputs start here */}
-						<label>
-							{' '}
-							Malts / Grain Bill
+						</div>
+						<div>
+							{/* Dynamic inputs start here */}
+							<label>Malts / Grain Bill</label>
 							<FieldArray
 								name="ingredients.malt"
 								render={arrayHelpers => (
@@ -253,15 +221,9 @@ export default function NewBeerForm(props) {
 									</div>
 								)}
 							/>{' '}
-						</label>
-
-						<label>
-							{' '}
-							Hops:
-							{/* name: '',
-								value: 0,
-								unit: '',
-								sched: '' */}
+						</div>
+						<div>
+							<label>Hops:</label>
 							<FieldArray
 								name="ingredients.hops"
 								render={arrayHelpers => (
@@ -309,9 +271,9 @@ export default function NewBeerForm(props) {
 									</div>
 								)}
 							/>{' '}
-						</label>
-						<label>
-							Yeast:
+						</div>
+						<div>
+							<label>Yeast:</label>
 							<input
 								type="string"
 								name="ingredients.yeast"
@@ -319,107 +281,30 @@ export default function NewBeerForm(props) {
 								onBlur={handleBlur}
 								vlaue={values.ingredients.yeast}
 							/>
-						</label>
+						</div>
+						<div>
+							<label>Ferment: </label>
+							<label>temp:</label>
+							<input
+								type="float"
+								name="method.ferment.temp"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								vlaue={values.method.ferment.temp}
+							/>
+							<label> duration:</label>
+							<input
+								type="String"
+								name="method.ferment.time"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								vlaue={values.method.ferment.time}
+							/>
+						</div>
 						<button type="submit">Submit</button>
 					</form>
 				)}
 			</Formik>
-			{/* <form onSubmit={handleSubmit}>
-				<label>
-					Brew Name
-					<input type="text" ref={name} />
-				</label>
-				<label>
-					Style
-					<input type="text" ref={style} />
-				</label>
-				<label>
-					Description
-					<input type="text" ref={description} />
-				</label>
-				<label>
-					abv
-					<input type="number" ref={abv} />
-				</label>
-				<label>
-					ibu
-					<input type="number" ref={ibu} />
-				</label>
-				<label>
-					Volume amount
-					<input type="number" ref={volumeVal} />
-				</label>
-				<label>
-					Volume unit
-					<input type="text" ref={volumeUnit} />
-				</label>
-				<label>
-					Boil amount
-					<input type="number" ref={boilValue} />
-				</label>
-				<label>
-					Boil unit
-					<input type="text" ref={boilUnit} />
-				</label>
-				<label>
-					Mash tempature
-					<input type="number" ref={mashTemp} />
-				</label>
-				<label>
-					Mash duration {'(mins)'}
-					<input type="number" ref={mashDuration} />
-				</label>
-				<label>
-					Fermentaion temp {`(C)`}
-					<input type="text" ref={fermentTemp} />
-				</label>
-				<label>
-					Fermentation duration
-					<input type="text" ref={fermentDuration} />
-				</label>
-				<label>
-					Malt name
-					<input type="text" ref={maltName} />
-				</label>
-				<label>
-					Malt amount
-					<input type="number" ref={maltValue} />
-				</label>
-				<label>
-					Malt unit
-					<input type="text" ref={maltunit} />
-				</label>
-				<label>
-					Hop Name
-					<input type="text" ref={hopName} />
-				</label>
-				<label>
-					Hop amount
-					<input type="number" ref={hopValue} />
-				</label>
-				<label>
-					Hop unit
-					<input type="text" ref={hopUnit} />
-				</label>
-				<label>
-					Hop add
-					<input type="text" ref={hopAdd} />
-				</label>
-				<label>
-					Hop attribute
-					<input type="text" ref={hopAttr} />
-				</label>
-				<label>
-					yeast
-					<input type="text" ref={yeast} />
-				</label>
-				<span className="button">
-					<label>
-						Create beer recipe
-						<input type="submit" />
-					</label>
-				</span>
-			</form> */}
 		</div>
 	);
 }

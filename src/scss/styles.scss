@@ -5,9 +5,6 @@
 
 :root{
   background-color: #ffdc83;
-  // background-image: url('https://images.pexels.com/photos/1568757/pexels-photo-1568757.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
-  // background-blend-mode: difference;
-  // background-color: rgb(210, 104, 48);
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 18px;
   text-align: center;
@@ -40,7 +37,6 @@
       top: 5vh;
       line-height: 1.5rem;
       text-align: left;
-
     }
     .center{
       width: 50%;
@@ -60,13 +56,30 @@
 
 
 }
-.beer-recipe{
-  clip-path: polygon(0 0%, 38% 0, 44% 18%, 100% 18%, 100% 100%, 0 100%);
+.beer-recipe,
+.Beer-Recipes,
+.lacto-recipe,
+.LactoFerments,
+.newLactofermentForm,
+.newbeerForm,
+.lactofermentEditForm,
+.beerEditForm{
+  clip-path: polygon(0 0%, 38% 0, 44% 10%, 100% 10%, 100% 100%, 0 100%);
   background-color: whitesmoke;
   margin: 20px;
   margin-bottom: 20vh;
   padding: 20px;
   z-index: -100;
+  form{
+    position: relative;
+    top: 5vh;
+    margin-bottom: 20vh;
+  }
+  .list-container{
+    position: relative;
+    top: 10vh;
+    margin-bottom: 20vh;
+  }
 }
 
 .NavBar {
@@ -83,7 +96,7 @@
     z-index: 300;
     a{
       // color: rgb(255, 213, 107);
-      color: indianred;
+      color: rgb(223, 10, 10);
       // width: 20vw;
       // border: 1px solid black;
     }
@@ -92,53 +105,7 @@
       width: 5vw;
     }
   }
-// @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Nothing+You+Could+Do&display=swap');
 
-// /// font-family: 'Lato', sans-serif;
-// //font-family: 'Nothing You Could Do', cursive;
-
-// body {
-//   font-size: 16px;
-//   // background: url('https://images.pexels.com/photos/1568757/pexels-photo-1568757.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
-//   background-color:burlywood;
-//   background-size: cover;
-//   font-family: 'Lato', sans-serif;
- 
-// }
-// // #app{
-// //   background-color:burlywood;
-// // }
-// .NavBar {
-//   position: fixed;
-//   bottom: 0;
-//   display: flex;
-//   justify-content: space-around;
-//   width: 100%;
-//   background-color: rgba(186, 245, 213, 0.8);
-//   padding: 5px;
-//   box-shadow: 2px 2px 4px black;
-// }
-// #app{
-//   h1, h2{
-//     font-family: 'Nothing You Could Do', cursive;
-//     text-decoration: underline black;
-//   }
-//   a{
-//     color:rgb(199, 18, 18);
-//   }
-//   .LactoFerments, .Beer-Recipes, .AppPage {
-//           background-color: rgba(255,255,255,0.9);
-//           //background-color: rgba(186, 245, 213, 0.8);
-//           margin: 20px 5vw;
-//           padding: 3%;
-//           min-height: 50vh;
-//           border-bottom:solid 6px rgba(0,0,0,0.6); 
-//           border-right:solid 4px rgba(0,0,0,0.6); 
-//           clip-path: polygon(0 0%, 38% 0, 44% 18%, 100% 18%, 100% 100%, 0 100%);
-//           h1{
-//             font-size: 2.6rem;
-//           }
-//   }
 ////////// List show pages
 
   .LactoFerments, .Beer-Recipes {
@@ -150,32 +117,50 @@
   }}
 //////// New and Edit forms
 
-  .newLactofermentForm, .newbeerForm, .lactofermentEditForm, .beerEditForm{
-    padding: 3%;
-    margin: 20px 5vw;
-    margin-bottom: 15vh;
-    background-color: whitesmoke;
-
+  .newLactofermentForm,
+  .newbeerForm,
+  .lactofermentEditForm,
+  .beerEditForm{
 
     .field-container{
       border: 2px solid black;
     }
-    
     form{
       display: flex;
       flex-direction: column;
       align-items:flex-end;
-      label{
+      min-height: 100vh;
+      div{
+        padding: 5px;
+        input{
+          padding: 10px;
+          margin: 3px 15px 3px 15px;
+        }
+      }
+      .name-field{
+        align-self: flex-start;
+        input{
+          width: 25vw;
+        }
+      }
+      .style-field{
+        align-self: flex-start;
+      }
+      .desc-field{
+        // align-self: flex-start;
+        margin: 20px;
+        input{
+          width: 80vw;
+          margin: 3px;
+        }
+      }
+      button{
         padding: 10px;
+        margin: 5px;
+        font-size: 20px;
       }
-      input{
-        width: 15vw;
-      }
-      // .button{
-        
-      // }
     }
- 
+
   }
 
 //   ////// Recipe pages

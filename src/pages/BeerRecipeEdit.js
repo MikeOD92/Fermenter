@@ -181,7 +181,7 @@ export default function NewBeerForm(props) {
 		<div className="beerEditForm">
 			<form onSubmit={submit}>
 				{beer.name ? (
-					<div>
+					<div className="name-field">
 						<label>Name:</label>
 						<input type="text" name={'name'} defaultValue={beer.name} />
 					</div>
@@ -190,8 +190,8 @@ export default function NewBeerForm(props) {
 				)}
 
 				{beer.style ? (
-					<div>
-						<label>Style:</label>
+					<div className="style-field">
+						<label>Style:{'      '} </label>
 						<input type="text" name={'style'} defaultValue={beer.style} />
 					</div>
 				) : (
@@ -199,7 +199,7 @@ export default function NewBeerForm(props) {
 				)}
 
 				{beer.description ? (
-					<div>
+					<div className="desc-field">
 						<label>description:</label>
 						<input
 							type="text"
@@ -208,7 +208,10 @@ export default function NewBeerForm(props) {
 						/>
 					</div>
 				) : (
-					''
+					<div className="desc-field">
+						<label>description:</label>
+						<input type="text" name={'description'} defaultValue={''} />
+					</div>
 				)}
 
 				{beer.abv ? (

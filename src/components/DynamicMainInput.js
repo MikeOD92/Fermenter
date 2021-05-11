@@ -63,10 +63,10 @@ export default function DynamicMainInput(props) {
 						key={`${props.lactoFerment.ingredients.main[index].unit}${index}`}
 					/>
 
-					<button onClick={add}>+</button>
 					<button onClick={remove} id={index}>
 						-
 					</button>
+					<button onClick={add}>+</button>
 				</div>
 			);
 		})
