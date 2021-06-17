@@ -143,9 +143,6 @@
   .lactofermentEditForm,
   .beerEditForm{
 
-    .field-container{
-      border: 2px solid black;
-    }
     form{
       display: flex;
       flex-direction: column;
@@ -159,23 +156,42 @@
         }
       }
       .name-field{
+        text-align: left;
         align-self: flex-start;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        bottom: 55px;
         input{
-          width: 25vw;
+          width: 30vw;
+          position: relative;
+          left: -15px;
         }
       }
       .style-field{
         align-self: flex-start;
         position: relative;
         left: 1vw;
+        bottom: 50px;
+        input{
+          width: 25vw;
+        }
       }
       .desc-field{
-        // align-self: flex-start;
         margin: 20px;
-        input{
-          width: 80vw;
-          margin: 3px;
+        text-align: left;
+        align-self: flex-start;
+        position: relative;
+        bottom: 40px;
+        label{
+          margin-right: 20px;
         }
+        input{
+          position: relative;
+          left: -15px;
+          width: 85vw;
+        }
+    
       }
       button{
         padding: 10px;

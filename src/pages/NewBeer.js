@@ -95,6 +95,7 @@ export default function NewBeerForm(props) {
 						<div className="desc-field">
 							<label>Description:</label>
 							<input
+								resize="none"
 								type="string"
 								name="description"
 								onChange={handleChange}
