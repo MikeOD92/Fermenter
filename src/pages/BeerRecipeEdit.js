@@ -179,7 +179,7 @@ export default function NewBeerForm(props) {
 
 	return (
 		<div className="beerEditForm">
-			<form onSubmit={submit}>
+			<form onSubmit={submit} className="beer-grid">
 				{beer.name ? (
 					<div className="name-field">
 						<label>Name:</label>

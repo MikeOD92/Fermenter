@@ -74,8 +74,12 @@
     position: relative;
     top: 5vh;
     margin-bottom: 20vh;
-  }
-  
+    .beer-grid{
+    display: grid;
+    grid-template-columns: 25vw 25vw 25vw 25vw;
+    grid-template-rows: auto;
+  }}
+
 }
 
 .NavBar {
@@ -201,7 +205,6 @@
     }
 
   }
-
 //   ////// Recipe pages
   .lacto-recipe, .beer-recipe{
     padding: 3%;

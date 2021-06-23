@@ -71,7 +71,7 @@ export default function NewBeerForm(props) {
 					handleBlur,
 					handleSubmit
 				}) => (
-					<form onSubmit={handleSubmit}>
+					<form onSubmit={handleSubmit} className="beer-grid">
 						<div className="name-field">
 							<label> Name:</label>
 							<input
