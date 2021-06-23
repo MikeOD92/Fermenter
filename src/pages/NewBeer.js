@@ -73,7 +73,7 @@ export default function NewBeerForm(props) {
 				}) => (
 					<form onSubmit={handleSubmit} className="beer-grid">
 						<div className="name-field">
-							<label> Name:</label>
+							<label> Name: </label>
 							<input
 								type="string"
 								name="name"
@@ -83,7 +83,7 @@ export default function NewBeerForm(props) {
 							/>
 						</div>
 						<div className="style-field">
-							<label>Style: {'       '}</label>
+							<label>Style: </label>
 							<input
 								type="string"
 								name="style"
@@ -93,7 +93,7 @@ export default function NewBeerForm(props) {
 							/>
 						</div>
 						<div className="desc-field">
-							<label>Description:</label>
+							<label>Description: </label>
 							<input
 								resize="none"
 								type="string"
@@ -103,7 +103,7 @@ export default function NewBeerForm(props) {
 								value={values.description}
 							/>
 						</div>
-						<div>
+						<div className="abv">
 							{/* beer specs */}
 							<label>ABV:</label>
 							<input
@@ -114,7 +114,7 @@ export default function NewBeerForm(props) {
 								value={values.abv}
 							/>
 						</div>
-						<div>
+						<div className="ibu">
 							<label>IBU:</label>
 							<input
 								type="float"
@@ -126,7 +126,7 @@ export default function NewBeerForm(props) {
 						</div>
 
 						{/* volume */}
-						<div>
+						<div className="volume">
 							<label> Volume:</label>
 							<input
 								type="float"
@@ -144,8 +144,7 @@ export default function NewBeerForm(props) {
 							/>
 						</div>
 						{/* method */}
-						<div>
-							<label> Method: </label>
+						<div className="method">
 							<label>Mash:</label>
 							<label> temp:</label>
 							<input
@@ -164,17 +163,7 @@ export default function NewBeerForm(props) {
 								vlaue={values.method.mash.duration}
 							/>
 						</div>
-						<div>
-							<label>wort:</label>
-							<input
-								type="String"
-								name="method.wort"
-								onChange={handleChange}
-								onBlur={handleBlur}
-								vlaue={values.method.wort}
-							/>
-						</div>
-						<div>
+						<div className="grains">
 							{/* Dynamic inputs start here */}
 							<label>Malts / Grain Bill</label>
 							<FieldArray
@@ -223,7 +212,17 @@ export default function NewBeerForm(props) {
 								)}
 							/>{' '}
 						</div>
-						<div>
+						<div className="wort">
+							<label>wort:</label>
+							<input
+								type="String"
+								name="method.wort"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								vlaue={values.method.wort}
+							/>
+						</div>
+						<div className="hops">
 							<label>Hops:</label>
 							<FieldArray
 								name="ingredients.hops"
@@ -273,7 +272,7 @@ export default function NewBeerForm(props) {
 								)}
 							/>{' '}
 						</div>
-						<div>
+						<div className="yeast">
 							<label>Yeast:</label>
 							<input
 								type="string"
@@ -283,7 +282,7 @@ export default function NewBeerForm(props) {
 								vlaue={values.ingredients.yeast}
 							/>
 						</div>
-						<div>
+						<div className="ferment">
 							<label>Ferment: </label>
 							<label>temp:</label>
 							<input
